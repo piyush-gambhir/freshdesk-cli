@@ -22,6 +22,7 @@ import (
 	"github.com/piyush-gambhir/freshdesk-cli/cli-go/internal/registry"
 	"github.com/piyush-gambhir/freshdesk-cli/cli-go/internal/secrets"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"golang.org/x/term"
 )
 
@@ -127,6 +128,7 @@ func execute(ctx context.Context, a *app, args []string) int {
 	if err == nil {
 		return 0
 	}
+	a.format = errorFormat(root, args, a.format)
 	apiErr := &client.APIError{Kind: "usage", Message: err.Error(), Outcome: "failed"}
 	var remote *client.APIError
 	if errors.As(err, &remote) {
@@ -153,6 +155,36 @@ func execute(ctx context.Context, a *app, args []string) int {
 		fmt.Fprintln(a.errOut, "Error:", safe.Error.Message)
 	}
 	return 1
+}
+
+// Recover only the requested error format after parsing fails. The probe knows
+// each flag's arity but treats values as strings so a bad --page cannot hide a
+// later -o json. It does not execute a command or read configuration.
+func errorFormat(root *cobra.Command, args []string, fallback string) string {
+	target, rest, err := root.Find(args)
+	if err != nil {
+		target, rest = root, args
+	}
+	if target.DisableFlagParsing {
+		return fallback
+	}
+	fs := pflag.NewFlagSet("error-format", pflag.ContinueOnError)
+	fs.SetOutput(io.Discard)
+	fs.ParseErrorsWhitelist.UnknownFlags = true
+	add := func(f *pflag.Flag) {
+		if fs.Lookup(f.Name) != nil {
+			return
+		}
+		fs.StringP(f.Name, f.Shorthand, f.DefValue, "")
+		fs.Lookup(f.Name).NoOptDefVal = f.NoOptDefVal
+	}
+	target.Flags().VisitAll(add)
+	target.InheritedFlags().VisitAll(add)
+	_ = fs.Parse(rest)
+	if f := fs.Lookup("output"); f != nil && f.Changed && output.Valid(f.Value.String()) {
+		return f.Value.String()
+	}
+	return fallback
 }
 
 func (a *app) print(value any) error { return output.Print(a.out, a.format, value) }

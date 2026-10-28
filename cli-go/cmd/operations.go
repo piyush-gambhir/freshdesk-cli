@@ -488,7 +488,7 @@ func (a *app) send(cmd *cobra.Command, c *client.Client, p client.Plan, op regis
 	if op.Note != "" {
 		warnings = append(warnings, op.Note)
 	}
-	if op.ID == "freshdesk.tickets.list" {
+	if op.ID == "freshdesk.tickets.list" && initialURL.Query().Get("updated_since") == "" {
 		warnings = append(warnings, "Freshdesk lists tickets created in the last 30 days by default; use --updated-since for older tickets. The API returns at most 300 pages.")
 	}
 	for {
@@ -554,6 +554,14 @@ func (a *app) send(cmd *cobra.Command, c *client.Client, p client.Plan, op regis
 		if status == 202 {
 			meta["outcome"] = "accepted"
 		}
+		if object, ok := data.(map[string]any); ok && object["job_id"] != nil {
+			meta["outcome"] = "accepted"
+		}
+	}
+	if !a.quiet && (a.format == "table" || a.format == "csv") {
+		for _, warning := range warnings {
+			fmt.Fprintln(a.errOut, "Note:", warning)
+		}
 	}
 	full := map[string]any{"contract_version": "agent-cli/v1", "command_id": op.ID, "data": data, "meta": meta}
 	var tableRows []map[string]any
@@ -568,6 +576,9 @@ func (a *app) send(cmd *cobra.Command, c *client.Client, p client.Plan, op regis
 		}
 	}
 	if (a.format == "table" || a.format == "csv") && tableRows == nil {
+		if data == nil && p.Effect == "write" {
+			return output.Print(a.out, a.format, map[string]any{"http_status": status, "outcome": meta["outcome"]})
+		}
 		return output.Print(a.out, a.format, data)
 	}
 	return output.View(a.out, a.format, full, tableRows)

@@ -353,3 +353,31 @@ func TestEmptyPaginationAndExplicitEmptyBody(t *testing.T) {
 		t.Fatalf("named ticket values were not mapped: %s %s", out, stderr)
 	}
 }
+
+func TestParserErrorsHonorJSONEvenAfterInvalidFlag(t *testing.T) {
+	isolate(t)
+	for _, args := range [][]string{{"tickets", "list", "--invalid", "-o", "json"}, {"tickets", "list", "--page", "invalid", "-o", "json"}, {"not-a-command", "-o", "json"}} {
+		code, out, stderr := call(t, nil, "", args...)
+		if code != 1 || out != "" || !json.Valid([]byte(stderr)) || !strings.Contains(stderr, `"kind": "usage"`) {
+			t.Fatalf("unstructured parser error %v: %s", args, stderr)
+		}
+	}
+}
+
+func TestQueuedJobIsAcceptedAndNoContentAcknowledged(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		return response(200, `{"job_id":"queued-job"}`, nil), nil
+	})
+	code, out, stderr := call(t, tr, "", "tickets", "bulk-update", "--input-json", `{"bulk_action":{"ids":[1],"properties":{"status":4}}}`, "--yes", "-o", "json")
+	if code != 0 || !strings.Contains(out, `"outcome": "accepted"`) {
+		t.Fatalf("queued job reported as applied: %s %s", out, stderr)
+	}
+	tr = transportFunc(func(r *http.Request) (*http.Response, error) { return response(204, "", nil), nil })
+	code, out, stderr = call(t, tr, "", "tickets", "delete", "1", "--yes")
+	if code != 0 || !strings.Contains(out, "applied") {
+		t.Fatalf("missing mutation acknowledgement: %s %s", out, stderr)
+	}
+}
