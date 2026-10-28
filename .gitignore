@@ -1,0 +1,9 @@
+.scratch/
+cli-go/bin/
+dist/
+.env
+.env.*
+!.env.example
+*.test
+coverage.out
+.DS_Store

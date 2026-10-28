@@ -1,0 +1,72 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: cli-go
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: cli-go/go.mod
+          cache-dependency-path: cli-go/go.sum
+      - run: test -z "$(gofmt -l .)"
+      - run: go vet ./...
+      - name: Staticcheck
+        if: matrix.os == 'ubuntu-24.04'
+        run: go run honnef.co/go/tools/cmd/staticcheck@v0.8.2 -checks=all,-ST1000,-ST1003,-ST1005 ./...
+      - name: Vulnerability scan
+        if: matrix.os == 'ubuntu-24.04'
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
+      - run: go test -race -count=1 ./...
+      - run: go build ./...
+      - name: Verify generated references
+        run: |
+          make docs
+          git diff --exit-code -- ../docs/commands.md ../docs/api-coverage.md
+      - name: Verify source install
+        run: |
+          install_dir="$(mktemp -d)"
+          make install "INSTALL_DIR=$install_dir"
+          "$install_dir/freshdesk$(go env GOEXE)" version -o json
+      - name: Verify registry regeneration
+        if: matrix.os == 'ubuntu-24.04'
+        working-directory: .
+        run: |
+          python3 scripts/build_registry.py
+          git diff --exit-code -- cli-go/internal/registry/operations.json
+  release-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: cli-go/go.mod
+          cache-dependency-path: cli-go/go.sum
+      - uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
+        with:
+          distribution: goreleaser
+          version: v2.18.3
+          args: release --snapshot --clean --skip=publish --config cli-go/.goreleaser.yaml

@@ -1,0 +1,4530 @@
+[
+  {
+    "id": "freshdesk.tickets.create",
+    "command": [
+      "tickets",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_ticket",
+    "source_path": "/api/v2/tickets",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.outbound-email",
+    "command": [
+      "tickets",
+      "outbound-email"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/outbound_email",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_outbound_email",
+    "source_path": "/api/v2/tickets/outbound_email",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.get",
+    "command": [
+      "tickets",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_a_ticket",
+    "source_path": "/api/v2/tickets/[id]"
+  },
+  {
+    "id": "freshdesk.tickets.associated",
+    "command": [
+      "tickets",
+      "associated"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/associated_tickets",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "get_associated_tickets",
+    "source_path": "/api/v2/tickets/[id]/associated_tickets",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.prime-association",
+    "command": [
+      "tickets",
+      "prime-association"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/prime_association",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "ticket_prime_association",
+    "source_path": "/api/v2/tickets/[id]/prime_association"
+  },
+  {
+    "id": "freshdesk.tickets.list",
+    "command": [
+      "tickets",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_tickets",
+    "source_path": "/api/v2/tickets",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.search",
+    "command": [
+      "tickets",
+      "search"
+    ],
+    "method": "GET",
+    "path": "/api/v2/search/tickets",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "filter_tickets",
+    "source_path": "/api/v2/search/tickets?query=[query]",
+    "pagination": "page",
+    "required_query": [
+      "query"
+    ]
+  },
+  {
+    "id": "freshdesk.tickets.update",
+    "command": [
+      "tickets",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_ticket",
+    "source_path": "/api/v2/tickets/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.bulk-update",
+    "command": [
+      "tickets",
+      "bulk-update"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/bulk_update",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "bulk_update_tickets",
+    "source_path": "/api/v2/tickets/bulk_update",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.forward",
+    "command": [
+      "tickets",
+      "forward"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{id}/forward",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "forward_tickets",
+    "source_path": "/api/v2/tickets/[id]/forward",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.merge",
+    "command": [
+      "tickets",
+      "merge"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/merge",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "ticket_merge",
+    "source_path": "/api/v2/tickets/merge",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.watchers.list",
+    "command": [
+      "tickets",
+      "watchers",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/watchers",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_watchers",
+    "source_path": "/api/v2/tickets/[id]/watchers",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.watch",
+    "command": [
+      "tickets",
+      "watch"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{id}/watch",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "add_watcher",
+    "source_path": "/api/v2/tickets/[id]/watch",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.unwatch",
+    "command": [
+      "tickets",
+      "unwatch"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/{id}/unwatch",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "remove_watcher",
+    "source_path": "/api/v2/tickets/[id]/unwatch",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.bulk-watch",
+    "command": [
+      "tickets",
+      "bulk-watch"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/bulk_watch",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "add_watcher_multiple_tickets",
+    "source_path": "/api/v2/tickets/bulk_watch",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.bulk-unwatch",
+    "command": [
+      "tickets",
+      "bulk-unwatch"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/bulk_unwatch",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "remove_watcher_multiple_tickets",
+    "source_path": "/api/v2/tickets/bulk_unwatch",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.delete",
+    "command": [
+      "tickets",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_a_ticket",
+    "source_path": "/api/v2/tickets/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.bulk-delete",
+    "command": [
+      "tickets",
+      "bulk-delete"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/bulk_delete",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "bulk_delete_tickets",
+    "source_path": "/api/v2/tickets/bulk_delete",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.attachments.delete",
+    "command": [
+      "attachments",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/attachments/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_an_attachment",
+    "source_path": "/api/v2/attachments/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.restore",
+    "command": [
+      "tickets",
+      "restore"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/{id}/restore",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "restore_a_ticket",
+    "source_path": "/api/v2/tickets/[id]/restore",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.fields",
+    "command": [
+      "tickets",
+      "fields"
+    ],
+    "method": "GET",
+    "path": "/api/v2/ticket_fields",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_ticket_fields",
+    "source_path": "/api/v2/ticket_fields",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.conversations",
+    "command": [
+      "tickets",
+      "conversations"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/conversations",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_ticket_notes",
+    "source_path": "/api/v2/tickets/[id]/conversations",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.time-entries",
+    "command": [
+      "tickets",
+      "time-entries"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/time_entries",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_ticket_timeentries",
+    "source_path": "/api/v2/tickets/[id]/time_entries",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.ratings",
+    "command": [
+      "tickets",
+      "ratings"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{ticket_id}/satisfaction_ratings",
+    "path_parameters": [
+      "ticket_id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "view_ticket_satisfaction_ratings",
+    "source_path": "/api/v2/tickets/[ticket_id]/satisfaction_ratings",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.summary.get",
+    "command": [
+      "tickets",
+      "summary",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/summary",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_ticket_summary",
+    "source_path": "/api/v2/tickets/[id]/summary"
+  },
+  {
+    "id": "freshdesk.tickets.summary.update",
+    "command": [
+      "tickets",
+      "summary",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/{id}/summary",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_ticket_summary",
+    "source_path": "/api/v2/tickets/[id]/summary",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.summary.delete",
+    "command": [
+      "tickets",
+      "summary",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/tickets/{id}/summary",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_ticket_summary",
+    "source_path": "/api/v2/tickets/[id]/summary",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.archived.get",
+    "command": [
+      "tickets",
+      "archived",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/archived/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_archive_ticket",
+    "source_path": "/api/v2/tickets/archived/[id]"
+  },
+  {
+    "id": "freshdesk.tickets.archived.delete",
+    "command": [
+      "tickets",
+      "archived",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/tickets/archived/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_archive_ticket",
+    "source_path": "/api/v2/tickets/archived/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.archived.conversations",
+    "command": [
+      "tickets",
+      "archived",
+      "conversations"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/archived/{id}/conversations",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_conversation_of_archive_tickets",
+    "source_path": "/api/v2/tickets/archived/[id]/conversations",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.access.create",
+    "command": [
+      "tickets",
+      "access",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{id}/accesses",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_user_accesses",
+    "source_path": "/api/v2/tickets/[id]/accesses",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.access.update",
+    "command": [
+      "tickets",
+      "access",
+      "update"
+    ],
+    "method": "PATCH",
+    "path": "/api/v2/tickets/{id}/accesses",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_user_accesses",
+    "source_path": "/api/v2/tickets/[id]/accesses",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.access.list",
+    "command": [
+      "tickets",
+      "access",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}/accesses",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "get_user_accesses",
+    "source_path": "/api/v2/tickets/[id]/accesses",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.access.delete",
+    "command": [
+      "tickets",
+      "access",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/tickets/{id}/accesses",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_user_accesses",
+    "source_path": "/api/v2/tickets/[id]/accesses",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.list",
+    "command": [
+      "ticket-fields",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/ticket_fields",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_ticket_fields",
+    "source_path": "/api/v2/admin/ticket_fields",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.ticket-fields.create",
+    "command": [
+      "ticket-fields",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/admin/ticket_fields",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_ticket_field",
+    "source_path": "/api/v2/admin/ticket_fields",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.get",
+    "command": [
+      "ticket-fields",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/ticket_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_ticket_field",
+    "source_path": "/api/v2/admin/ticket_fields/[id]"
+  },
+  {
+    "id": "freshdesk.ticket-fields.update",
+    "command": [
+      "ticket-fields",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/admin/ticket_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_ticket_field",
+    "source_path": "/api/v2/admin/ticket_fields/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.delete",
+    "command": [
+      "ticket-fields",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/admin/ticket_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_ticket_field",
+    "source_path": "/api/v2/admin/ticket_fields/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.sections.list",
+    "command": [
+      "ticket-fields",
+      "sections",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/ticket_fields/{id}/sections",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_section_fields",
+    "source_path": "/api/v2/admin/ticket_fields/[id]/sections",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.ticket-fields.sections.create",
+    "command": [
+      "ticket-fields",
+      "sections",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/admin/ticket_fields/{id}/sections",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_section",
+    "source_path": "/api/v2/admin/ticket_fields/[id]/sections",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.sections.get",
+    "command": [
+      "ticket-fields",
+      "sections",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/ticket_fields/{id}/sections/{section_id}",
+    "path_parameters": [
+      "id",
+      "section_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "list_specific_section",
+    "source_path": "/api/v2/admin/ticket_fields/[id]/sections/[section_id]"
+  },
+  {
+    "id": "freshdesk.ticket-fields.sections.update",
+    "command": [
+      "ticket-fields",
+      "sections",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/admin/ticket_fields/{id}/sections/{section_id}",
+    "path_parameters": [
+      "id",
+      "section_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_section",
+    "source_path": "/api/v2/admin/ticket_fields/[id]/sections/[section_id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-fields.sections.delete",
+    "command": [
+      "ticket-fields",
+      "sections",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/admin/ticket_fields/{id}/sections/{section_id}",
+    "path_parameters": [
+      "id",
+      "section_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_section",
+    "source_path": "/api/v2/admin/ticket_fields/[id]/sections/[section_id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.list",
+    "command": [
+      "ticket-forms",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/ticket-forms",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_ticket_forms",
+    "source_path": "/api/v2/ticket-forms",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.ticket-forms.create",
+    "command": [
+      "ticket-forms",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/ticket-forms",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_ticket_form",
+    "source_path": "/api/v2/ticket-forms",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.get",
+    "command": [
+      "ticket-forms",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/ticket-forms/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_ticket_form",
+    "source_path": "/api/v2/ticket-forms/[id]"
+  },
+  {
+    "id": "freshdesk.ticket-forms.update",
+    "command": [
+      "ticket-forms",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/ticket-forms/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_ticket_form",
+    "source_path": "/api/v2/ticket-forms/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.delete",
+    "command": [
+      "ticket-forms",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/ticket-forms/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_ticket_form",
+    "source_path": "/api/v2/ticket-forms/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.clone",
+    "command": [
+      "ticket-forms",
+      "clone"
+    ],
+    "method": "GET",
+    "path": "/api/v2/ticket-forms/{id}/clone",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "clone_ticket_form",
+    "source_path": "/api/v2/ticket-forms/[id]",
+    "note": "The reference's curl example includes /clone; the heading omits it. GET has a write effect.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.fields.get",
+    "command": [
+      "ticket-forms",
+      "fields",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/ticket-forms/{form_id}/fields/{field_id}",
+    "path_parameters": [
+      "form_id",
+      "field_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_ticket_form_field",
+    "source_path": "/api/v2/ticket-forms/[form-id]/fields/[field-id]"
+  },
+  {
+    "id": "freshdesk.ticket-forms.fields.update",
+    "command": [
+      "ticket-forms",
+      "fields",
+      "update"
+    ],
+    "method": "POST",
+    "path": "/api/v2/ticket-forms/{form_id}/fields/{field_id}",
+    "path_parameters": [
+      "form_id",
+      "field_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_ticket_form_field",
+    "source_path": "/api/v2/ticket-forms/[form-id]/fields/[field-id]",
+    "note": "Reference specifies POST for updating a form field.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.ticket-forms.fields.delete",
+    "command": [
+      "ticket-forms",
+      "fields",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/ticket-forms/{form_id}/fields/{field_id}",
+    "path_parameters": [
+      "form_id",
+      "field_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_ticket_form_field",
+    "source_path": "/api/v2/ticket-forms/[form-id]/fields/[field-id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.reply",
+    "command": [
+      "tickets",
+      "reply"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{id}/reply",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "reply_ticket",
+    "source_path": "/api/v2/tickets/[id]/reply",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.note",
+    "command": [
+      "tickets",
+      "note"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{ticket_id}/notes",
+    "path_parameters": [
+      "ticket_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "add_note_to_a_ticket",
+    "source_path": "/api/v2/tickets/[ticket_id]/notes",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.conversations.update",
+    "command": [
+      "conversations",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/conversations/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_conversation",
+    "source_path": "/api/v2/conversations/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.conversations.delete",
+    "command": [
+      "conversations",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/conversations/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_conversation",
+    "source_path": "/api/v2/conversations/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.tickets.reply-to-forward",
+    "command": [
+      "tickets",
+      "reply-to-forward"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{id}/reply_to_forward",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "reply_to_forward",
+    "source_path": "/api/v2/tickets/[id]/reply_to_forward",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.outbound-messages.send",
+    "command": [
+      "outbound-messages",
+      "send"
+    ],
+    "method": "POST",
+    "path": "/api/v2/channels/outbound-messages",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "send_outbound_message",
+    "source_path": "/api/v2/channels/outbound-messages",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.outbound-messages.get",
+    "command": [
+      "outbound-messages",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/channels/outbound-messages/{message_id}",
+    "path_parameters": [
+      "message_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_outbound_message",
+    "source_path": "/api/v2/channels/outbound-messages/[message-id]"
+  },
+  {
+    "id": "freshdesk.account.get",
+    "command": [
+      "account",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/account",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_account",
+    "source_path": "/api/v2/account"
+  },
+  {
+    "id": "freshdesk.account.export",
+    "command": [
+      "account",
+      "export"
+    ],
+    "method": "POST",
+    "path": "/api/v2/account/export",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "generate_export",
+    "source_path": "api/v2/account/export",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.jobs.get",
+    "command": [
+      "jobs",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/jobs/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_job",
+    "source_path": "/api/v2/jobs/[id]"
+  },
+  {
+    "id": "freshdesk.contacts.create",
+    "command": [
+      "contacts",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contacts",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_contact",
+    "source_path": "/api/v2/contacts",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.get",
+    "command": [
+      "contacts",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_contact",
+    "source_path": "/api/v2/contacts/[id]"
+  },
+  {
+    "id": "freshdesk.contacts.list",
+    "command": [
+      "contacts",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_contacts",
+    "source_path": "/api/v2/contacts",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.contacts.autocomplete",
+    "command": [
+      "contacts",
+      "autocomplete"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts/autocomplete",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "search_contacts",
+    "source_path": "/api/v2/contacts/autocomplete?term=[keyword]",
+    "required_query": [
+      "term"
+    ]
+  },
+  {
+    "id": "freshdesk.contacts.search",
+    "command": [
+      "contacts",
+      "search"
+    ],
+    "method": "GET",
+    "path": "/api/v2/search/contacts",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "filter_contacts",
+    "source_path": "/api/v2/search/contacts?query=[query]",
+    "pagination": "page",
+    "required_query": [
+      "query"
+    ]
+  },
+  {
+    "id": "freshdesk.contacts.update",
+    "command": [
+      "contacts",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_contact",
+    "source_path": "/api/v2/contacts/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.delete",
+    "command": [
+      "contacts",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/contacts/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_contact",
+    "source_path": "/api/v2/contacts/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.hard-delete",
+    "command": [
+      "contacts",
+      "hard-delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/contacts/{id}/hard_delete",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "hard_delete_contact",
+    "source_path": "/api/v2/contacts/[id]/hard_delete",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.make-agent",
+    "command": [
+      "contacts",
+      "make-agent"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/{id}/make_agent",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "make_agent",
+    "source_path": "/api/v2/contacts/[id]/make_agent",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.restore",
+    "command": [
+      "contacts",
+      "restore"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/{id}/restore",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "restore_contact",
+    "source_path": "api/v2/contacts/[id]/restore",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.send-invite",
+    "command": [
+      "contacts",
+      "send-invite"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/{id}/send_invite",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "send_invite",
+    "source_path": "api/v2/contacts/[id]/send_invite",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.merge",
+    "command": [
+      "contacts",
+      "merge"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contacts/merge",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "merge_contact",
+    "source_path": "api/v2/contacts/merge",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.exports.create",
+    "command": [
+      "contacts",
+      "exports",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contacts/export",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "export_contact",
+    "source_path": "api/v2/contacts/export",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.exports.get",
+    "command": [
+      "contacts",
+      "exports",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts/export/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "export_contact",
+    "source_path": "api/v2/contacts/export/[id]"
+  },
+  {
+    "id": "freshdesk.contacts.imports.list",
+    "command": [
+      "contacts",
+      "imports",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts/imports",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "import_contact",
+    "source_path": "api/v2/contacts/imports",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.contacts.imports.get",
+    "command": [
+      "contacts",
+      "imports",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contacts/imports/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "import_contact",
+    "source_path": "api/v2/contacts/imports/[id]"
+  },
+  {
+    "id": "freshdesk.contacts.imports.create",
+    "command": [
+      "contacts",
+      "imports",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contacts/imports",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "import_contact",
+    "source_path": "api/v2/contacts/imports",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contacts.imports.cancel",
+    "command": [
+      "contacts",
+      "imports",
+      "cancel"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/imports/{id}/cancel",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "import_contact",
+    "source_path": "api/v2/contacts/imports/[id]/cancel",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contact-fields.list",
+    "command": [
+      "contact-fields",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contact_fields",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_contact_fields",
+    "source_path": "/api/v2/contact_fields",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.contact-fields.get",
+    "command": [
+      "contact-fields",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/contact_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_contact_field",
+    "source_path": "/api/v2/contact_fields/[id]"
+  },
+  {
+    "id": "freshdesk.contact-fields.create",
+    "command": [
+      "contact-fields",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contact_fields",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_contact_field",
+    "source_path": "/api/v2/contact_fields",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contact-fields.update",
+    "command": [
+      "contact-fields",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contact_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_contact_field",
+    "source_path": "/api/v2/contact_fields/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.contact-fields.delete",
+    "command": [
+      "contact-fields",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/contact_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_contact_field",
+    "source_path": "/api/v2/contact_field/[id]",
+    "note": "The curl example uses plural contact_fields; the heading is singular.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.agents.get",
+    "command": [
+      "agents",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_agent",
+    "source_path": "/api/v2/agents/[id]"
+  },
+  {
+    "id": "freshdesk.agents.list",
+    "command": [
+      "agents",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_agents",
+    "source_path": "/api/v2/agents",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.agents.create",
+    "command": [
+      "agents",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/agents/",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_agent",
+    "source_path": "/api/v2/agents/",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.agents.update",
+    "command": [
+      "agents",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/agents/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_agent",
+    "source_path": "/api/v2/agents/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.agents.delete",
+    "command": [
+      "agents",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/agents/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_agent",
+    "source_path": "/api/v2/agents/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.agents.me",
+    "command": [
+      "agents",
+      "me"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents/me",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "me",
+    "source_path": "/api/v2/agents/me"
+  },
+  {
+    "id": "freshdesk.agents.bulk-create",
+    "command": [
+      "agents",
+      "bulk-create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/agents/bulk",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_multiple_agents",
+    "source_path": "/api/v2/agents/bulk",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.agents.autocomplete",
+    "command": [
+      "agents",
+      "autocomplete"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents/autocomplete",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "search_agents",
+    "source_path": "/api/v2/agents/autocomplete?term=[keyword]",
+    "required_query": [
+      "term"
+    ]
+  },
+  {
+    "id": "freshdesk.agents.availability.list",
+    "command": [
+      "agents",
+      "availability",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_agents_availability",
+    "source_path": "/api/v2/agents?page=1&per_page=10&only=availability",
+    "pagination": "page",
+    "query_defaults": {
+      "page": "1",
+      "per_page": "10",
+      "only": "availability"
+    }
+  },
+  {
+    "id": "freshdesk.agents.availability.get",
+    "command": [
+      "agents",
+      "availability",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/agents/{id}/availability",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_agent_availability",
+    "source_path": "/api/v2/agents/[id]/availability"
+  },
+  {
+    "id": "freshdesk.agents.availability.update",
+    "command": [
+      "agents",
+      "availability",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/agents/{id}/availability",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_agent_availability",
+    "source_path": "/api/v2/agents/[id]/availability",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.skills.get",
+    "command": [
+      "skills",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/skills/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_skill",
+    "source_path": "/api/v2/admin/skills/[id]"
+  },
+  {
+    "id": "freshdesk.skills.list",
+    "command": [
+      "skills",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/skills/",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_skills",
+    "source_path": "/api/v2/admin/skills/",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.skills.create",
+    "command": [
+      "skills",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/admin/skills",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_skill",
+    "source_path": "/api/v2/admin/skills",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.skills.delete",
+    "command": [
+      "skills",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/admin/skills/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_skill",
+    "source_path": "/api/v2/admin/skills/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.skills.update",
+    "command": [
+      "skills",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/admin/skills/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_skill",
+    "source_path": "/api/v2/admin/skills/[id]",
+    "note": "Reference labels the verb 'update'; its curl example specifies PUT.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.roles.get",
+    "command": [
+      "roles",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/roles/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_role",
+    "source_path": "/api/v2/roles/[id]"
+  },
+  {
+    "id": "freshdesk.roles.list",
+    "command": [
+      "roles",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/roles",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_roles",
+    "source_path": "/api/v2/roles",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.groups.create",
+    "command": [
+      "groups",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/groups",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_group",
+    "source_path": "/api/v2/groups",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.groups.get",
+    "command": [
+      "groups",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_group",
+    "source_path": "/api/v2/groups/[id]"
+  },
+  {
+    "id": "freshdesk.groups.list",
+    "command": [
+      "groups",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/groups",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_groups",
+    "source_path": "/api/v2/groups",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.groups.update",
+    "command": [
+      "groups",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_group",
+    "source_path": "/api/v2/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.groups.delete",
+    "command": [
+      "groups",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_group",
+    "source_path": "/api/v2/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.admin-groups.create",
+    "command": [
+      "admin-groups",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/admin/groups",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_admin_group",
+    "source_path": "/api/v2/admin/groups",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.admin-groups.get",
+    "command": [
+      "admin-groups",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_admin_group",
+    "source_path": "/api/v2/admin/groups/[id]"
+  },
+  {
+    "id": "freshdesk.admin-groups.list",
+    "command": [
+      "admin-groups",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/groups",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_admin_groups",
+    "source_path": "/api/v2/admin/groups",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.admin-groups.update",
+    "command": [
+      "admin-groups",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/admin/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_admin_group",
+    "source_path": "/api/v2/admin/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.admin-groups.delete",
+    "command": [
+      "admin-groups",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/admin/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_admin_group",
+    "source_path": "/api/v2/admin/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.admin-groups.agents.list",
+    "command": [
+      "admin-groups",
+      "agents",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/admin/groups/{id}/agents",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_agents_in_a_group",
+    "source_path": "/api/v2/admin/groups/[id]/agents",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.admin-groups.agents.update",
+    "command": [
+      "admin-groups",
+      "agents",
+      "update"
+    ],
+    "method": "PATCH",
+    "path": "/api/v2/admin/groups/{id}/agents",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "add_or_remove_agent_in_a_group",
+    "source_path": "/api/v2/admin/groups/[id]/agents",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.create",
+    "command": [
+      "companies",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/companies",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_company",
+    "source_path": "/api/v2/companies",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.get",
+    "command": [
+      "companies",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_company",
+    "source_path": "/api/v2/companies/[id]"
+  },
+  {
+    "id": "freshdesk.companies.list",
+    "command": [
+      "companies",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_companies",
+    "source_path": "/api/v2/companies",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.companies.autocomplete",
+    "command": [
+      "companies",
+      "autocomplete"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies/autocomplete",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "search_companies",
+    "source_path": "/api/v2/companies/autocomplete?name=[keyword]",
+    "required_query": [
+      "name"
+    ]
+  },
+  {
+    "id": "freshdesk.companies.search",
+    "command": [
+      "companies",
+      "search"
+    ],
+    "method": "GET",
+    "path": "/api/v2/search/companies",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "filter_companies",
+    "source_path": "/api/v2/search/companies?query=[query]",
+    "pagination": "page",
+    "required_query": [
+      "query"
+    ]
+  },
+  {
+    "id": "freshdesk.companies.update",
+    "command": [
+      "companies",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/companies/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_company",
+    "source_path": "/api/v2/companies/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.delete",
+    "command": [
+      "companies",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/companies/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_company",
+    "source_path": "/api/v2/companies/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.exports.create",
+    "command": [
+      "companies",
+      "exports",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/companies/export",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "export_company",
+    "source_path": "api/v2/companies/export",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.exports.get",
+    "command": [
+      "companies",
+      "exports",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies/export/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "export_company",
+    "source_path": "api/v2/companies/export/[id]"
+  },
+  {
+    "id": "freshdesk.companies.imports.list",
+    "command": [
+      "companies",
+      "imports",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies/imports",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "import_company",
+    "source_path": "api/v2/companies/imports",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.companies.imports.get",
+    "command": [
+      "companies",
+      "imports",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/companies/imports/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "import_company",
+    "source_path": "api/v2/companies/imports/[id]"
+  },
+  {
+    "id": "freshdesk.companies.imports.create",
+    "command": [
+      "companies",
+      "imports",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/companies/imports",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "import_company",
+    "source_path": "api/v2/companies/imports",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.companies.imports.cancel",
+    "command": [
+      "companies",
+      "imports",
+      "cancel"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/companies/imports/{id}/cancel",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "import_company",
+    "source_path": "api/v2/companies/imports/[id]/cancel",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.company-fields.list",
+    "command": [
+      "company-fields",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/company_fields",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_company_fields",
+    "source_path": "/api/v2/company_fields",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.company-fields.get",
+    "command": [
+      "company-fields",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/company_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_company_field",
+    "source_path": "/api/v2/company_fields/[id]"
+  },
+  {
+    "id": "freshdesk.company-fields.create",
+    "command": [
+      "company-fields",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/company_fields",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_company_field",
+    "source_path": "api/v2/company_fields",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.company-fields.update",
+    "command": [
+      "company-fields",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/company_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_company_field",
+    "source_path": "api/v2/company_field/[id]",
+    "note": "The curl example uses plural company_fields; the heading is singular.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.company-fields.delete",
+    "command": [
+      "company-fields",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/company_fields/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_company_field",
+    "source_path": "api/v2/company_field/[id]",
+    "note": "Use plural company_fields, consistent with the reference's curl example.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.custom-objects.list",
+    "command": [
+      "custom-objects",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_existing_custom_objects",
+    "source_path": "/api/v2/custom_objects/schemas"
+  },
+  {
+    "id": "freshdesk.custom-objects.get",
+    "command": [
+      "custom-objects",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}",
+    "path_parameters": [
+      "schema_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_specific_custom_object",
+    "source_path": "/api/v2/custom_objects/schemas/{schema-id}"
+  },
+  {
+    "id": "freshdesk.custom-objects.records.create",
+    "command": [
+      "custom-objects",
+      "records",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records/",
+    "path_parameters": [
+      "schema_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_a_new_custom_object_record",
+    "source_path": "/api/v2/custom_objects/schemas/schema-id/records/",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.custom-objects.records.get",
+    "command": [
+      "custom-objects",
+      "records",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records/{record_id}",
+    "path_parameters": [
+      "schema_id",
+      "record_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_a_custom_object_record",
+    "source_path": "/api/v2/custom_objects/schemas/{schema-id}/records/{record-id}"
+  },
+  {
+    "id": "freshdesk.custom-objects.records.update",
+    "command": [
+      "custom-objects",
+      "records",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records/{record_id}",
+    "path_parameters": [
+      "schema_id",
+      "record_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_a_custom_object_record",
+    "source_path": "/api/v2/custom_objects/schemas/schema-id/records/{record-id}",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.custom-objects.records.delete",
+    "command": [
+      "custom-objects",
+      "records",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records/{record_id}",
+    "path_parameters": [
+      "schema_id",
+      "record_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_a_custom_object_record",
+    "source_path": "/api/v2/custom_objects/schemas/schema-id/records/{record-id}",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.custom-objects.records.list",
+    "command": [
+      "custom-objects",
+      "records",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records",
+    "path_parameters": [
+      "schema_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_all_the_records_of_a_custom_object",
+    "source_path": "/api/v2/custom_objects/schemas/schema-id/records"
+  },
+  {
+    "id": "freshdesk.custom-objects.records.count",
+    "command": [
+      "custom-objects",
+      "records",
+      "count"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records/count",
+    "path_parameters": [
+      "schema_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "retrieve_the_count_of_records_custom_objects",
+    "source_path": "/api/v2/custom_objects/schemas/schema_id/records/count"
+  },
+  {
+    "id": "freshdesk.custom-objects.records.filter",
+    "command": [
+      "custom-objects",
+      "records",
+      "filter"
+    ],
+    "method": "GET",
+    "path": "/api/v2/custom_objects/schemas/{schema_id}/records",
+    "path_parameters": [
+      "schema_id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "filter_records_of_custom_objects",
+    "source_path": "/api/v2/custom_objects/schemas/schema_id/records?{field-name}{operator}{value}"
+  },
+  {
+    "id": "freshdesk.canned-responses.create",
+    "command": [
+      "canned-responses",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/canned_responses",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_canned_response",
+    "source_path": "/api/v2/canned_responses",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.canned-responses.get",
+    "command": [
+      "canned-responses",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/canned_responses/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_canned_response",
+    "source_path": "/api/v2/canned_responses/[id]"
+  },
+  {
+    "id": "freshdesk.canned-responses.update",
+    "command": [
+      "canned-responses",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/canned_responses/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_canned_response",
+    "source_path": "api/v2/canned_responses/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.canned-responses.bulk-create",
+    "command": [
+      "canned-responses",
+      "bulk-create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/canned_responses/bulk",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "bulk_create_canned_responses",
+    "source_path": "/api/v2/canned_responses/bulk",
+    "note": "Reference heading specifies /canned_responses/bulk; its curl example has a duplicated /api/v2 and a different suffix. This command uses the heading; live verification is pending.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.canned-responses.folders.create",
+    "command": [
+      "canned-responses",
+      "folders",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/canned_response_folders",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_canned_response_folder",
+    "source_path": "/api/v2/canned_response_folder",
+    "note": "The curl example uses plural canned_response_folders; the heading is singular.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.canned-responses.folders.update",
+    "command": [
+      "canned-responses",
+      "folders",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/canned_response_folders/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_canned_response_folder",
+    "source_path": "/api/v2/canned_response_folder/[id]",
+    "note": "The curl example uses plural canned_response_folders; the heading is singular.",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.canned-responses.folders.list",
+    "command": [
+      "canned-responses",
+      "folders",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/canned_response_folders",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_canned_response_folders",
+    "source_path": "/canned_response_folders",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.canned-responses.folders.get",
+    "command": [
+      "canned-responses",
+      "folders",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/canned_response_folders/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_canned_response_folders",
+    "source_path": "/canned_response_folders/[id]"
+  },
+  {
+    "id": "freshdesk.canned-responses.folders.responses",
+    "command": [
+      "canned-responses",
+      "folders",
+      "responses"
+    ],
+    "method": "GET",
+    "path": "/api/v2/canned_response_folders/{id}/responses",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "get_details_of_canned_responses_in_folders",
+    "source_path": "/canned_response_folders/[id]/responses",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.discussions.categories.create",
+    "command": [
+      "discussions",
+      "categories",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/categories",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_category",
+    "source_path": "/api/v2/discussions/categories",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.categories.get",
+    "command": [
+      "discussions",
+      "categories",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_category",
+    "source_path": "/api/v2/discussions/categories/[id]"
+  },
+  {
+    "id": "freshdesk.discussions.categories.list",
+    "command": [
+      "discussions",
+      "categories",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/categories",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_categories",
+    "source_path": "/api/v2/discussions/categories",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.discussions.forums.list",
+    "command": [
+      "discussions",
+      "forums",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/categories/{id}/forums",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_forums",
+    "source_path": "/api/v2/discussions/categories/[id]/forums",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.discussions.categories.update",
+    "command": [
+      "discussions",
+      "categories",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/discussions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_category",
+    "source_path": "/api/v2/discussions/categories/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.categories.delete",
+    "command": [
+      "discussions",
+      "categories",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_category",
+    "source_path": "/api/v2/discussions/categories/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.create",
+    "command": [
+      "discussions",
+      "forums",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/categories/{category_id}/forums",
+    "path_parameters": [
+      "category_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_forum",
+    "source_path": "/api/v2/discussions/categories/[category_id]/forums",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.get",
+    "command": [
+      "discussions",
+      "forums",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/forums/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_forum",
+    "source_path": "/api/v2/discussions/forums/[id]"
+  },
+  {
+    "id": "freshdesk.discussions.topics.list",
+    "command": [
+      "discussions",
+      "topics",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/forums/{id}/topics",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_topics",
+    "source_path": "/api/v2/discussions/forums/[id]/topics",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.discussions.forums.update",
+    "command": [
+      "discussions",
+      "forums",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/discussions/forums/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_forum",
+    "source_path": "/api/v2/discussions/forums/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.delete",
+    "command": [
+      "discussions",
+      "forums",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/forums/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_forum",
+    "source_path": "/api/v2/discussions/forums/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.follow",
+    "command": [
+      "discussions",
+      "forums",
+      "follow"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/forums/{id}/follow",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "monitor_forum",
+    "source_path": "/api/v2/discussions/forums/[id]/follow",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.unfollow",
+    "command": [
+      "discussions",
+      "forums",
+      "unfollow"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/forums/{forum_id}/follow",
+    "path_parameters": [
+      "forum_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "unmonitor_forum",
+    "source_path": "/api/v2/discussions/forums/[forum_id]/follow?user_id=[user_id]",
+    "required_query": [
+      "user_id"
+    ],
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.forums.follow-status",
+    "command": [
+      "discussions",
+      "forums",
+      "follow-status"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/forums/{id}/follow",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_monitor_status_for_forum",
+    "source_path": "/api/v2/discussions/forums/[id]/follow?user_id=[id]",
+    "required_query": [
+      "user_id"
+    ]
+  },
+  {
+    "id": "freshdesk.discussions.topics.create",
+    "command": [
+      "discussions",
+      "topics",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/forums/{forum_id}/topics",
+    "path_parameters": [
+      "forum_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_topic",
+    "source_path": "/api/v2/discussions/forums/[forum_id]/topics",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.topics.get",
+    "command": [
+      "discussions",
+      "topics",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/topics/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_topic",
+    "source_path": "/api/v2/discussions/topics/[id]"
+  },
+  {
+    "id": "freshdesk.discussions.comments.list",
+    "command": [
+      "discussions",
+      "comments",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/topics/{id}/comments",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_comments",
+    "source_path": "/api/v2/discussions/topics/[id]/comments",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.discussions.topics.update",
+    "command": [
+      "discussions",
+      "topics",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/discussions/topics/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_topic",
+    "source_path": "/api/v2/discussions/topics/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.topics.delete",
+    "command": [
+      "discussions",
+      "topics",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/topics/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_topic",
+    "source_path": "/api/v2/discussions/topics/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.topics.follow",
+    "command": [
+      "discussions",
+      "topics",
+      "follow"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/topics/{id}/follow",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "monitor_topic",
+    "source_path": "/api/v2/discussions/topics/[id]/follow",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.topics.unfollow",
+    "command": [
+      "discussions",
+      "topics",
+      "unfollow"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/topics/{topic_id}/follow",
+    "path_parameters": [
+      "topic_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "unmonitor_topic",
+    "source_path": "/api/v2/discussions/topics/[topic_id]/follow?user_id=[user_id]",
+    "required_query": [
+      "user_id"
+    ],
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.topics.follow-status",
+    "command": [
+      "discussions",
+      "topics",
+      "follow-status"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/topics/{id}/follow",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_monitor_status_for_topic",
+    "source_path": "/api/v2/discussions/topics/[id]/follow?user_id=[id]",
+    "required_query": [
+      "user_id"
+    ]
+  },
+  {
+    "id": "freshdesk.discussions.topics.followed",
+    "command": [
+      "discussions",
+      "topics",
+      "followed"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/topics/followed_by",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_monitored_topics",
+    "source_path": "/api/v2/discussions/topics/followed_by?user_id=[id]",
+    "pagination": "page",
+    "required_query": [
+      "user_id"
+    ]
+  },
+  {
+    "id": "freshdesk.discussions.topics.participated",
+    "command": [
+      "discussions",
+      "topics",
+      "participated"
+    ],
+    "method": "GET",
+    "path": "/api/v2/discussions/topics/participated_by",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_participated_topics",
+    "source_path": "/api/v2/discussions/topics/participated_by?user_id=[id]",
+    "pagination": "page",
+    "required_query": [
+      "user_id"
+    ]
+  },
+  {
+    "id": "freshdesk.discussions.comments.create",
+    "command": [
+      "discussions",
+      "comments",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/discussions/topics/{topic_id}/comments",
+    "path_parameters": [
+      "topic_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_comment",
+    "source_path": "/api/v2/discussions/topics/[topic_id]/comments",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.comments.update",
+    "command": [
+      "discussions",
+      "comments",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/discussions/comments/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_comment",
+    "source_path": "/api/v2/discussions/comments/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.discussions.comments.delete",
+    "command": [
+      "discussions",
+      "comments",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/discussions/comments/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_comment",
+    "source_path": "/api/v2/discussions/comments/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.categories.create",
+    "command": [
+      "solutions",
+      "categories",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/categories",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_category",
+    "source_path": "/api/v2/solutions/categories",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.categories.translations.create",
+    "command": [
+      "solutions",
+      "categories",
+      "translations",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/categories/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.categories.update",
+    "command": [
+      "solutions",
+      "categories",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.categories.translations.update",
+    "command": [
+      "solutions",
+      "categories",
+      "translations",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/categories/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.categories.get",
+    "command": [
+      "solutions",
+      "categories",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]"
+  },
+  {
+    "id": "freshdesk.solutions.categories.translations.get",
+    "command": [
+      "solutions",
+      "categories",
+      "translations",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]/[language_code]"
+  },
+  {
+    "id": "freshdesk.solutions.categories.list",
+    "command": [
+      "solutions",
+      "categories",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_categories",
+    "source_path": "/api/v2/solutions/categories",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.categories.translations.list",
+    "command": [
+      "solutions",
+      "categories",
+      "translations",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories/{language_code}",
+    "path_parameters": [
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_categories",
+    "source_path": "/api/v2/solutions/categories/[language_code]",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.categories.delete",
+    "command": [
+      "solutions",
+      "categories",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/solutions/categories/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_solution_category",
+    "source_path": "/api/v2/solutions/categories/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.folders.create",
+    "command": [
+      "solutions",
+      "folders",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/categories/{id}/folders",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_folder",
+    "source_path": "/api/v2/solutions/categories/[id]/folders",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.folders.translations.create",
+    "command": [
+      "solutions",
+      "folders",
+      "translations",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/folders/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.folders.update",
+    "command": [
+      "solutions",
+      "folders",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/folders/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.folders.translations.update",
+    "command": [
+      "solutions",
+      "folders",
+      "translations",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/folders/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.folders.get",
+    "command": [
+      "solutions",
+      "folders",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]"
+  },
+  {
+    "id": "freshdesk.solutions.folders.translations.get",
+    "command": [
+      "solutions",
+      "folders",
+      "translations",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]/[language_code]"
+  },
+  {
+    "id": "freshdesk.solutions.folders.list",
+    "command": [
+      "solutions",
+      "folders",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories/{category_id}/folders",
+    "path_parameters": [
+      "category_id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_folders",
+    "source_path": "/api/v2/solutions/categories/[category_id]/folders",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.folders.translations.list",
+    "command": [
+      "solutions",
+      "folders",
+      "translations",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/categories/{category_id}/folders/{language_code}",
+    "path_parameters": [
+      "category_id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_folders",
+    "source_path": "/api/v2/solutions/categories/[category_id]/folders/[language_code]",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.folders.subfolders",
+    "command": [
+      "solutions",
+      "folders",
+      "subfolders"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{folder_id}/subfolders",
+    "path_parameters": [
+      "folder_id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_sub_folders",
+    "source_path": "/api/v2/solutions/folders/[folder_id]/subfolders",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.folders.translations.subfolders",
+    "command": [
+      "solutions",
+      "folders",
+      "translations",
+      "subfolders"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{folder_id}/subfolders/{language_code}",
+    "path_parameters": [
+      "folder_id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_sub_folders",
+    "source_path": "/api/v2/solutions/folders/[folder_id]/subfolders/[language_code]",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.folders.delete",
+    "command": [
+      "solutions",
+      "folders",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/solutions/folders/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_solution_folder",
+    "source_path": "/api/v2/solutions/folders/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.create",
+    "command": [
+      "solutions",
+      "articles",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/folders/{id}/articles",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_article",
+    "source_path": "/api/v2/solutions/folders/[id]/articles",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.translations.create",
+    "command": [
+      "solutions",
+      "articles",
+      "translations",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/solutions/articles/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.update",
+    "command": [
+      "solutions",
+      "articles",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/articles/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.translations.update",
+    "command": [
+      "solutions",
+      "articles",
+      "translations",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/solutions/articles/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]/[language_code]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.get",
+    "command": [
+      "solutions",
+      "articles",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/articles/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]"
+  },
+  {
+    "id": "freshdesk.solutions.articles.translations.get",
+    "command": [
+      "solutions",
+      "articles",
+      "translations",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/articles/{id}/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]/[language_code]"
+  },
+  {
+    "id": "freshdesk.solutions.articles.list",
+    "command": [
+      "solutions",
+      "articles",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{id}/articles",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_articles",
+    "source_path": "/api/v2/solutions/folders/[id]/articles",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.articles.translations.list",
+    "command": [
+      "solutions",
+      "articles",
+      "translations",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/solutions/folders/{id}/articles/{language_code}",
+    "path_parameters": [
+      "id",
+      "language_code"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_solution_articles",
+    "source_path": "/api/v2/solutions/folders/[id]/articles/[language_code]",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.solutions.articles.delete",
+    "command": [
+      "solutions",
+      "articles",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/solutions/articles/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_solution_article",
+    "source_path": "/api/v2/solutions/articles/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.solutions.articles.search",
+    "command": [
+      "solutions",
+      "articles",
+      "search"
+    ],
+    "method": "GET",
+    "path": "/api/v2/search/solutions",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "search_solution_article",
+    "source_path": "/api/v2/search/solutions?term=[keyword]",
+    "required_query": [
+      "term"
+    ]
+  },
+  {
+    "id": "freshdesk.csat.surveys.list",
+    "command": [
+      "csat",
+      "surveys",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/customer-satisfaction/surveys",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "csat_surveys",
+    "source_path": "/api/v2/customer-satisfaction/surveys",
+    "pagination": "cursor"
+  },
+  {
+    "id": "freshdesk.csat.responses.create",
+    "command": [
+      "csat",
+      "responses",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/customer-satisfaction/surveys/{survey_id}/responses",
+    "path_parameters": [
+      "survey_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_survey_responses",
+    "source_path": "/api/v2/customer-satisfaction/surveys/{survey_id}/responses",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.csat.responses.list",
+    "command": [
+      "csat",
+      "responses",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/customer-satisfaction/surveys/{survey_id}/responses",
+    "path_parameters": [
+      "survey_id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "view_survey_responses",
+    "source_path": "/api/v2/customer-satisfaction/surveys/{survey_id}/responses",
+    "pagination": "cursor"
+  },
+  {
+    "id": "freshdesk.surveys.list",
+    "command": [
+      "surveys",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/surveys",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_survey",
+    "source_path": "/api/v2/surveys",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.tickets.ratings.create",
+    "command": [
+      "tickets",
+      "ratings",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{ticket_id}/satisfaction_ratings",
+    "path_parameters": [
+      "ticket_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_satisfaction_rating",
+    "source_path": "/api/v2/tickets/[ticket_id]/satisfaction_ratings",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.surveys.ratings.list",
+    "command": [
+      "surveys",
+      "ratings",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/surveys/satisfaction_ratings",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "view_all_satisfaction_ratings",
+    "source_path": "/api/v2/surveys/satisfaction_ratings",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.service.tasks.create",
+    "command": [
+      "service",
+      "tasks",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_service_task",
+    "source_path": "/api/v2/tickets",
+    "body_defaults": {
+      "type": "Service Task"
+    },
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.tasks.get",
+    "command": [
+      "service",
+      "tasks",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_service_task",
+    "source_path": "/api/v2/tickets/[id]"
+  },
+  {
+    "id": "freshdesk.service.tasks.update",
+    "command": [
+      "service",
+      "tasks",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_service_task",
+    "source_path": "/api/v2/tickets/[id]",
+    "body_defaults": {
+      "type": "Service Task"
+    },
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.tasks.delete",
+    "command": [
+      "service",
+      "tasks",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/tickets/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_service_task",
+    "source_path": "/api/v2/tickets/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.groups.create",
+    "command": [
+      "service",
+      "groups",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/groups",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_service_group",
+    "source_path": "/api/v2/groups",
+    "body_defaults": {
+      "group_type": "field_agent_group"
+    },
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.groups.get",
+    "command": [
+      "service",
+      "groups",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_service_group",
+    "source_path": "/api/v2/groups/[id]"
+  },
+  {
+    "id": "freshdesk.service.groups.update",
+    "command": [
+      "service",
+      "groups",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_service_group",
+    "source_path": "/api/v2/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.groups.delete",
+    "command": [
+      "service",
+      "groups",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/groups/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_service_group",
+    "source_path": "/api/v2/groups/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.service.make-technician",
+    "command": [
+      "service",
+      "make-technician"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/contacts/{id}/make_agent",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "make_field_technician",
+    "source_path": "/api/v2/contacts/[id]/make_agent",
+    "body_defaults": {
+      "type": "field_agent"
+    },
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.time-entries.create",
+    "command": [
+      "time-entries",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/tickets/{ticket_id}/time_entries",
+    "path_parameters": [
+      "ticket_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_time_entry",
+    "source_path": "/api/v2/tickets/[ticket_id]/time_entries",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.time-entries.list",
+    "command": [
+      "time-entries",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/time_entries",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_time_entries",
+    "source_path": "/api/v2/time_entries",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.time-entries.update",
+    "command": [
+      "time-entries",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/time_entries/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_time_entry",
+    "source_path": "/api/v2/time_entries/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.time-entries.toggle",
+    "command": [
+      "time-entries",
+      "toggle"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/time_entries/{time_entry_id}/toggle_timer",
+    "path_parameters": [
+      "time_entry_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "toggle_time_entry",
+    "source_path": "/api/v2/time_entries/[time_entry_id]/toggle_timer",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.time-entries.delete",
+    "command": [
+      "time-entries",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/time_entries/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_time_entry",
+    "source_path": "/api/v2/time_entries/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email-configs.get",
+    "command": [
+      "email-configs",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/email_configs/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_email_config",
+    "source_path": "/api/v2/email_configs/[id]"
+  },
+  {
+    "id": "freshdesk.email-configs.list",
+    "command": [
+      "email-configs",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/email_configs",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_email_configs",
+    "source_path": "/api/v2/email_configs",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.email.mailboxes.create",
+    "command": [
+      "email",
+      "mailboxes",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/email/mailboxes",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_email_mailbox",
+    "source_path": "/api/v2/email/mailboxes",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email.mailboxes.get",
+    "command": [
+      "email",
+      "mailboxes",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/email/mailboxes/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_email_mailbox",
+    "source_path": "/api/v2/email/mailboxes/[id]"
+  },
+  {
+    "id": "freshdesk.email.mailboxes.list",
+    "command": [
+      "email",
+      "mailboxes",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/email/mailboxes",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_email_mailboxes",
+    "source_path": "/api/v2/email/mailboxes",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.email.mailboxes.update",
+    "command": [
+      "email",
+      "mailboxes",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/email/mailboxes/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_email_mailbox",
+    "source_path": "/api/v2/email/mailboxes/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email.mailboxes.delete",
+    "command": [
+      "email",
+      "mailboxes",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/email/mailboxes/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_email_mailbox",
+    "source_path": "/api/v2/email/mailboxes/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email.settings.update",
+    "command": [
+      "email",
+      "settings",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/email/settings",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_mailbox_settings",
+    "source_path": "/api/v2/email/settings",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email.settings.get",
+    "command": [
+      "email",
+      "settings",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/email/settings",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_mailbox_settings",
+    "source_path": "/api/v2/email/settings"
+  },
+  {
+    "id": "freshdesk.email.bcc.update",
+    "command": [
+      "email",
+      "bcc",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/notifications/email/bcc",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_automatic_bcc_emails",
+    "source_path": "/api/v2/notifications/email/bcc",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.email.bcc.get",
+    "command": [
+      "email",
+      "bcc",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/notifications/email/bcc",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_automatic_bcc_emails",
+    "source_path": "/api/v2/notifications/email/bcc"
+  },
+  {
+    "id": "freshdesk.products.get",
+    "command": [
+      "products",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/products/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_product",
+    "source_path": "/api/v2/products/[id]"
+  },
+  {
+    "id": "freshdesk.products.list",
+    "command": [
+      "products",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/products",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_products",
+    "source_path": "/api/v2/products",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.business-hours.get",
+    "command": [
+      "business-hours",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/business_hours/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_business_hour",
+    "source_path": "/api/v2/business_hours/[id]"
+  },
+  {
+    "id": "freshdesk.business-hours.list",
+    "command": [
+      "business-hours",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/business_hours",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_business_hours",
+    "source_path": "/api/v2/business_hours",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.scenario-automations.list",
+    "command": [
+      "scenario-automations",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/scenario_automations",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_scenario_automations",
+    "source_path": "/scenario_automations.json",
+    "pagination": "page",
+    "note": "The heading shows a legacy .json route; the curl example uses /api/v2/scenario_automations."
+  },
+  {
+    "id": "freshdesk.sla-policies.create",
+    "command": [
+      "sla-policies",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/sla_policies",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_sla_policy",
+    "source_path": "/api/v2/sla_policies",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.sla-policies.list",
+    "command": [
+      "sla-policies",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/sla_policies",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_sla_policies",
+    "source_path": "/api/v2/sla_policies",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.sla-policies.update",
+    "command": [
+      "sla-policies",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/sla_policies/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_sla_policy",
+    "source_path": "/api/v2/sla_policies/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.activities.publish",
+    "command": [
+      "activities",
+      "publish"
+    ],
+    "method": "POST",
+    "path": "/api/v2/contact-activities",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "publish_omnichannel_activity",
+    "source_path": "/api/v2/contact-activities",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.automations.list",
+    "command": [
+      "automations",
+      "list"
+    ],
+    "method": "GET",
+    "path": "/api/v2/automations/{automation_type_id}/rules",
+    "path_parameters": [
+      "automation_type_id"
+    ],
+    "effect": "read",
+    "paginated": true,
+    "source_anchor": "list_all_automation_rules",
+    "source_path": "/api/v2/automations/[automation_type_id]/rules",
+    "pagination": "page"
+  },
+  {
+    "id": "freshdesk.automations.get",
+    "command": [
+      "automations",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/automations/{automation_type_id}/rules/{id}",
+    "path_parameters": [
+      "automation_type_id",
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "view_an_automation_rule",
+    "source_path": "/api/v2/automations/[automation_type_id]/rules/[id]"
+  },
+  {
+    "id": "freshdesk.automations.delete",
+    "command": [
+      "automations",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/automations/{automation_type_id}/rules/{id}",
+    "path_parameters": [
+      "automation_type_id",
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_an_automation_rule",
+    "source_path": "/api/v2/automations/[automation_type_id]/rules/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.automations.create",
+    "command": [
+      "automations",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/automations/{automation_type_id}/rules",
+    "path_parameters": [
+      "automation_type_id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_an_automation_rule",
+    "source_path": "/api/v2/automations/[automation_type_id]/rules",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.automations.update",
+    "command": [
+      "automations",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/automations/{automation_type_id}/rules/{id}",
+    "path_parameters": [
+      "automation_type_id",
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_an_automation_rule",
+    "source_path": "/api/v2/automations/[automation_type_id]/rules/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.settings.get",
+    "command": [
+      "settings",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/settings/helpdesk",
+    "path_parameters": [],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "settings_helpdesk",
+    "source_path": "/api/v2/settings/helpdesk"
+  },
+  {
+    "id": "freshdesk.threads.create",
+    "command": [
+      "threads",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/collaboration/threads",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_a_thread",
+    "source_path": "api/v2/collaboration/threads",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.get",
+    "command": [
+      "threads",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/collaboration/threads/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "get_a_thread",
+    "source_path": "api/v2/collaboration/threads/[id]"
+  },
+  {
+    "id": "freshdesk.threads.update",
+    "command": [
+      "threads",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/collaboration/threads/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_a_thread",
+    "source_path": "api/v2/collaboration/threads/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.delete",
+    "command": [
+      "threads",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/collaboration/threads/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_a_thread",
+    "source_path": "api/v2/collaboration/threads/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.messages.create",
+    "command": [
+      "threads",
+      "messages",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/collaboration/messages",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "create_message_for_thread",
+    "source_path": "api/v2/collaboration/messages",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.messages.get",
+    "command": [
+      "threads",
+      "messages",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/collaboration/messages/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "get_message_for_thread",
+    "source_path": "api/v2/collaboration/messages/[id]"
+  },
+  {
+    "id": "freshdesk.threads.messages.update",
+    "command": [
+      "threads",
+      "messages",
+      "update"
+    ],
+    "method": "PUT",
+    "path": "/api/v2/collaboration/messages/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "update_message_for_thread",
+    "source_path": "api/v2/collaboration/messages/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.messages.delete",
+    "command": [
+      "threads",
+      "messages",
+      "delete"
+    ],
+    "method": "DELETE",
+    "path": "/api/v2/collaboration/messages/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "delete_message_for_thread",
+    "source_path": "api/v2/collaboration/messages/[id]",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.threads.messages.quote",
+    "command": [
+      "threads",
+      "messages",
+      "quote"
+    ],
+    "method": "GET",
+    "path": "/api/v2/collaboration/messages/{id}/generate-quote",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "get_quoted_text",
+    "source_path": "api/v2/collaboration/messages/[id]/generate-quote"
+  },
+  {
+    "id": "freshdesk.audit-log.exports.create",
+    "command": [
+      "audit-log",
+      "exports",
+      "create"
+    ],
+    "method": "POST",
+    "path": "/api/v2/audit_log/export",
+    "path_parameters": [],
+    "effect": "write",
+    "paginated": false,
+    "source_anchor": "export_audit_log",
+    "source_path": "api/v2/audit_log/export",
+    "confirmation": true
+  },
+  {
+    "id": "freshdesk.audit-log.exports.get",
+    "command": [
+      "audit-log",
+      "exports",
+      "get"
+    ],
+    "method": "GET",
+    "path": "/api/v2/audit_log/export/{id}",
+    "path_parameters": [
+      "id"
+    ],
+    "effect": "read",
+    "paginated": false,
+    "source_anchor": "export_audit_log",
+    "source_path": "api/v2/audit_log/export/[id]"
+  }
+]
