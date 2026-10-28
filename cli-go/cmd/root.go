@@ -170,7 +170,7 @@ func errorFormat(root *cobra.Command, args []string, fallback string) string {
 	}
 	fs := pflag.NewFlagSet("error-format", pflag.ContinueOnError)
 	fs.SetOutput(io.Discard)
-	fs.ParseErrorsWhitelist.UnknownFlags = true
+	fs.ParseErrorsAllowlist.UnknownFlags = true
 	add := func(f *pflag.Flag) {
 		if fs.Lookup(f.Name) != nil {
 			return
