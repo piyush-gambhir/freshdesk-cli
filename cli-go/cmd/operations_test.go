@@ -333,6 +333,37 @@ func TestRawReadOnlyDoesNotSendBody(t *testing.T) {
 	}
 }
 
+func TestRawPreviewUsesTheResolvedCommandID(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	args := []string{"api", "request", "PUT", "/api/v2/tickets/1", "--input-json", `{"status":4}`}
+	code, resolved, stderr := call(t, nil, "", append([]string{"commands", "resolve", "--"}, args...)...)
+	if code != 0 {
+		t.Fatal(stderr)
+	}
+	var resolution struct {
+		CommandID string `json:"command_id"`
+	}
+	if err := json.Unmarshal([]byte(resolved), &resolution); err != nil {
+		t.Fatal(err)
+	}
+	code, preview, stderr := call(t, nil, "", append(args, "--dry-run", "-o", "json")...)
+	if code != 0 {
+		t.Fatal(stderr)
+	}
+	var plan struct {
+		Plan struct {
+			CommandID string `json:"command_id"`
+		}
+	}
+	if err := json.Unmarshal([]byte(preview), &plan); err != nil {
+		t.Fatal(err)
+	}
+	if plan.Plan.CommandID != resolution.CommandID {
+		t.Fatalf("resolver and preview disagree: %s vs %s", resolution.CommandID, plan.Plan.CommandID)
+	}
+}
+
 func TestEmptyPaginationAndExplicitEmptyBody(t *testing.T) {
 	isolate(t)
 	t.Setenv("FRESHDESK_DOMAIN", "acme")

@@ -32,6 +32,7 @@ func (a *app) apiCmd() *cobra.Command {
 		op.RequiredQuery = nil
 		op.BodyDefaults = nil
 		op.Paginated = false
+		op.ID = "freshdesk.api.request"
 		return a.request(cmd, op, args[1], f)
 	}
 	c.AddCommand(raw)
