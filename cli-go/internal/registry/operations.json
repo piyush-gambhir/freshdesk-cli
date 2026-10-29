@@ -577,10 +577,9 @@
     "path": "/api/v2/admin/ticket_fields",
     "path_parameters": [],
     "effect": "read",
-    "paginated": true,
+    "paginated": false,
     "source_anchor": "list_all_ticket_fields",
-    "source_path": "/api/v2/admin/ticket_fields",
-    "pagination": "page"
+    "source_path": "/api/v2/admin/ticket_fields"
   },
   {
     "id": "freshdesk.ticket-fields.create",

@@ -31,6 +31,30 @@ func TestCSATCursorPaginationPreservesFilters(t *testing.T) {
 	}
 }
 
+func TestCSATHTTPLinkKeepsRequestsOnHTTPS(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	calls := 0
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		calls++
+		if r.URL.Scheme != "https" || r.URL.Host != "acme.freshdesk.com" {
+			t.Fatalf("cursor downgraded request security: %s", r.URL)
+		}
+		if calls == 1 {
+			return response(200, `{"data":[{"id":"first"}],"paging":{"next":"http://acme.freshdesk.com/api/v2/customer-satisfaction/surveys?next_token=next123&per_page=1"}}`, nil), nil
+		}
+		if r.URL.Query().Get("next_token") != "next123" {
+			t.Error("cursor token was not preserved")
+		}
+		return response(200, `{"data":[{"id":"second"}],"paging":{"next":null}}`, nil), nil
+	})
+	code, out, stderr := call(t, tr, "", "csat", "surveys", "list", "--per-page", "1", "--all", "-o", "json")
+	if code != 0 || calls != 2 || !strings.Contains(out, `"complete": true`) {
+		t.Fatalf("%s %s calls=%d", out, stderr, calls)
+	}
+}
+
 func TestCSATCursorRejectsCrossOriginAndLoops(t *testing.T) {
 	isolate(t)
 	t.Setenv("FRESHDESK_DOMAIN", "acme")

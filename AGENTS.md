@@ -9,5 +9,5 @@
 - Test with fake transports and temporary config directories. Use `keyring.MockInit()` for credential tests, never a real keychain or helpdesk.
 - Run focused tests, then `make test vet build docs`. Generated docs must be committed with registry or flag changes.
 - Preserve native JSON fields and integer precision. Report incomplete pages and ambiguous mutation outcomes accurately.
-- The initial release is documentation-verified and fixture-tested, without live tenant verification. Keep upstream discrepancies visible in `docs/api-coverage.md`.
+- Keep verification claims precise: `docs/live-verification.md` records read checks and the approved one-ticket lifecycle test. Other writes remain fixture-tested. Keep upstream discrepancies visible in `docs/api-coverage.md`.
 - No em dashes. No deployment, production config changes, or edits to sibling repositories as part of ordinary work here.

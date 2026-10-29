@@ -49,7 +49,7 @@ func main() {
 
 func coverage() {
 	fmt.Printf("# Freshdesk API coverage\n\nThe reviewed registry covers **%d documented operation variants**, including translations and field-service variants that reuse an endpoint. This is a documentation coverage count, not a count of unique routes or live-verified features.\n\nSource: [Freshdesk API reference](https://developers.freshdesk.com/api/), retrieved 2026-10-29.\nThe endpoint-facts snapshot is in `cli-go/internal/registry/testdata/freshdesk-api.json`.\nRegistry SHA-256: `%s`.\n\n", len(registry.Operations), registry.Hash())
-	fmt.Println("All rows have named commands and pass request-routing fixture tests. No live Freshdesk tenant was used. Plan entitlements and agent permissions still apply.\n\n| Command | Verb | Path | Effect | Reference |\n| --- | --- | --- | --- | --- |")
+	fmt.Println("All rows have named commands and pass request-routing fixture tests. See [live verification notes](live-verification.md) for read checks and the approved one-ticket lifecycle test. Other writes remain fixture-tested; plan entitlements and agent permissions still apply.\n\n| Command | Verb | Path | Effect | Reference |\n| --- | --- | --- | --- | --- |")
 	for _, op := range registry.Operations {
 		fmt.Printf("| `%s` | %s | `%s` | %s | [reference](https://developers.freshdesk.com/api/#%s) |\n", strings.Join(op.Command, " "), op.Method, op.Path, op.Effect, op.SourceAnchor)
 	}

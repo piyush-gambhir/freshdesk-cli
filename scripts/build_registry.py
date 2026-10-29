@@ -327,6 +327,9 @@ def main():
         # parameters remain available, but --all must not guess that protocol.
         if command.startswith("custom-objects") or "autocomplete" in command or command == "solutions articles search":
             paginated = False
+        # The admin ticket-field endpoint rejects page and per_page.
+        if command == "ticket-fields list":
+            paginated = False
         body_defaults = {}
         if command in {"service tasks create", "service tasks update"}:
             body_defaults = {"type": "Service Task"}

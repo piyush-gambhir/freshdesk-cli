@@ -427,7 +427,11 @@ func nextPage(p client.Plan, res *client.Response, op registry.Operation) (strin
 			if paging, ok := m["paging"].(map[string]any); ok {
 				if value, ok := paging["next"].(string); ok && value != "" {
 					next, err := current.Parse(value)
-					if err != nil || next.Scheme != current.Scheme || next.Host != current.Host || next.Path != current.Path || next.User != nil || next.Fragment != "" {
+					// Freshdesk can return an http cursor link for an HTTPS API
+					// response. Extract only its token and rebuild on the original
+					// HTTPS origin; never follow or send credentials to that URL.
+					sameScheme := err == nil && (next.Scheme == current.Scheme || current.Scheme == "https" && next.Scheme == "http")
+					if !sameScheme || next.Host != current.Host || next.Path != current.Path || next.User != nil || next.Fragment != "" {
 						return "", fmt.Errorf("unsafe cursor pagination link from Freshdesk")
 					}
 					token := next.Query().Get("next_token")

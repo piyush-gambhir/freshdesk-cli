@@ -136,7 +136,7 @@ Every write supports `--dry-run`, `--expect-plan HASH`, and `--yes`.
 | `freshdesk tickets access update ID [flags]` | `PATCH /api/v2/tickets/{id}/accesses` | write | false |
 | `freshdesk tickets access list ID [flags]` | `GET /api/v2/tickets/{id}/accesses` | read | true |
 | `freshdesk tickets access delete ID [flags]` | `DELETE /api/v2/tickets/{id}/accesses` | write | false |
-| `freshdesk ticket-fields list [flags]` | `GET /api/v2/admin/ticket_fields` | read | true |
+| `freshdesk ticket-fields list [flags]` | `GET /api/v2/admin/ticket_fields` | read | false |
 | `freshdesk ticket-fields create [flags]` | `POST /api/v2/admin/ticket_fields` | write | false |
 | `freshdesk ticket-fields get ID [flags]` | `GET /api/v2/admin/ticket_fields/{id}` | read | false |
 | `freshdesk ticket-fields update ID [flags]` | `PUT /api/v2/admin/ticket_fields/{id}` | write | false |

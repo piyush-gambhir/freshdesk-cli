@@ -364,6 +364,22 @@ func TestRawPreviewUsesTheResolvedCommandID(t *testing.T) {
 	}
 }
 
+func TestAdminTicketFieldsDoNotSendUnsupportedPagination(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		if r.URL.RawQuery != "" {
+			t.Fatalf("unexpected pagination: %s", r.URL.RawQuery)
+		}
+		return response(200, `[{"id":1}]`, nil), nil
+	})
+	code, out, stderr := call(t, tr, "", "ticket-fields", "list", "-o", "json")
+	if code != 0 || !strings.Contains(out, `"id": 1`) {
+		t.Fatalf("%s %s", out, stderr)
+	}
+}
+
 func TestEmptyPaginationAndExplicitEmptyBody(t *testing.T) {
 	isolate(t)
 	t.Setenv("FRESHDESK_DOMAIN", "acme")
