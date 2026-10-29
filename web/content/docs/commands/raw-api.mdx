@@ -1,0 +1,15 @@
+---
+title: Raw API requests
+description: Send a same-origin request using the same effect classification and write controls as named commands.
+---
+
+```bash
+freshdesk api methods -o json
+freshdesk --read-only api request GET /api/v2/tickets --param per_page=10 -o json
+```
+
+Known routes use the operation registry's semantic effect. Unknown routes are treated as writes, including GET routes. Requests stay on the configured helpdesk origin; absolute URLs and traversal paths are rejected.
+
+Raw calls require manual pagination through `--param` and native response metadata. They do not inherit named-operation query defaults or positional rules. Prefer a named command when one exists.
+
+Raw writes support the same payload, preview, confirmation, and hash controls. A dry run sends no request and does not prove Freshdesk accepts the payload or route.

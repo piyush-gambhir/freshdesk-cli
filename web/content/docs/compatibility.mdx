@@ -1,0 +1,28 @@
+---
+title: Coverage and compatibility
+description: Distinguish documented API coverage, fixture tests, and live tenant verification.
+---
+
+The operation registry maps 266 documented Freshdesk API operation variants to named commands. That count includes documented variants and is not a count of unique routes or every feature in the Freshdesk UI.
+
+## API coverage
+
+The [coverage report](/docs/reference/api-coverage) maps the pinned source inventory to commands, HTTP verbs, and read/write effects. It records corrections for conflicting upstream route examples. The inventory and registry are checked during CI.
+
+The generic JSON and `--set` inputs preserve native and account-specific fields. Request previews check construction; they do not implement Freshdesk's account-specific business validation.
+
+## Live verification
+
+Read checks verified many operations and identified compatibility fixes for admin ticket fields and CSAT cursor URLs. One explicitly approved ticket test exercised creation, priority updates, private-note creation/edit/deletion, attachment upload/deletion, and ticket soft-deletion.
+
+Bulk/admin writes, public replies, imports, and exports remain fixture-tested unless the [verification record](/docs/reference/live-verification) says otherwise. Entitlements, permissions, and business rules can differ by account.
+
+## Troubleshooting
+
+- `401`: check the selected domain and credential source, then verify the key.
+- `403`: inspect the agent's permissions and the account's available features.
+- `404`: check the resource and route; an unavailable feature can also return this status.
+- `429`: observe `retry_after`. The CLI will not retry automatically.
+- An uncertain write outcome: inspect the resource before trying again.
+
+Use `freshdesk COMMAND --help` or the [generated reference](/docs/reference/commands) for exact positional IDs and flags.

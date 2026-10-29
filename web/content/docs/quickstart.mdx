@@ -1,0 +1,40 @@
+---
+title: Quick start
+description: Verify the selected agent, read tickets, and preview a change without sending it.
+---
+
+## Connect and verify
+
+After [installing](/docs/installation), save your key and inspect the agent identity:
+
+```bash
+freshdesk auth login --domain your-team
+freshdesk --read-only agents me -o json
+```
+
+## Read tickets
+
+```bash
+freshdesk --read-only --no-input tickets list --per-page 10 -o json
+freshdesk --read-only --no-input tickets get 123 -o json
+```
+
+Replace `123` with a ticket ID from your own account. Ticket lists default to tickets created in the last 30 days. Use `--updated-since` when you need an older window, and inspect [pagination metadata](/docs/pagination) before treating a list as complete.
+
+## Preview a change
+
+```bash
+freshdesk tickets update 123 --status pending --dry-run -o json
+```
+
+A dry run sends no request and needs no API key. It returns the planned request and its hash. Review the target, fields, and possible effects before executing the same command with `--expect-plan HASH --yes --no-input`.
+
+The key's owner is the acting Freshdesk agent. Ticket changes can trigger account automations and notifications. See [write controls](/docs/safety) before approving a mutation.
+
+## Discover another command
+
+```bash
+freshdesk commands -o json
+freshdesk commands describe freshdesk.tickets.list -o json
+freshdesk tickets list --help
+```
