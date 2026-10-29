@@ -242,6 +242,9 @@ func TestOfflineDiscoveryNoConfigNetworkOrSecretOutput(t *testing.T) {
 		if args[1] == "resolve" && !strings.Contains(out, `"effect": "write"`) {
 			t.Fatal("GET clone was classified as read")
 		}
+		if args[1] == "resolve" && (!strings.Contains(out, `"secret_output": false`) || !strings.Contains(out, `"interactive": false`)) {
+			t.Fatal("resolver omitted secret_output or interactive")
+		}
 	}
 	for _, test := range []struct{ method, path, effect string }{{"GET", "/api/v2/tickets/42", "read"}, {"GET", "/api/v2/ticket-forms/42/clone", "write"}, {"GET", "/api/v2/unknown", "write"}, {"POST", "/api/v2/tickets", "write"}} {
 		if op := classify(test.method, test.path); op.Effect != test.effect {
