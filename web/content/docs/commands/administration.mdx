@@ -1,0 +1,24 @@
+---
+title: Administration
+description: Inspect the selected agent, groups, fields, automations, and other account configuration.
+---
+
+```bash
+freshdesk --read-only agents me -o json
+freshdesk --read-only agents list -o json
+freshdesk --read-only groups list -o json
+freshdesk --read-only ticket-fields list -o json
+freshdesk --read-only sla-policies list -o json
+```
+
+The admin ticket-fields endpoint is not paginated. Do not add `--param page=...` or `--param per_page=...` to it.
+
+## Automation rules
+
+`freshdesk automations list` takes the documented automation type ID as its first positional argument. Inspect the [reference](/docs/reference/commands) and your Freshdesk configuration when selecting a type. Reading rules does not evaluate their conditions or predict all downstream effects.
+
+## Wider account effects
+
+Role, agent, group, automation, SLA, email, and custom-object changes can affect existing workflows. Review account permissions and the complete request before authorizing them. These mutations are fixture-tested and have not all been exercised against a live account.
+
+Ticket-form cloning is classified as a write even though its HTTP verb is GET. Read-only mode blocks it.

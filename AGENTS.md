@@ -11,3 +11,6 @@
 - Preserve native JSON fields and integer precision. Report incomplete pages and ambiguous mutation outcomes accurately.
 - Keep verification claims precise: `docs/live-verification.md` records read checks and the approved one-ticket lifecycle test. Other writes remain fixture-tested. Keep upstream discrepancies visible in `docs/api-coverage.md`.
 - No em dashes. No deployment, production config changes, or edits to sibling repositories as part of ordinary work here.
+
+- The public docs site is in `web/`, using the approved CLI-suite template and coral accent. Follow `web/AGENTS.md`; run type checks, the static build, search checks, and rendered desktop/mobile checks for website changes.
+- Release by changing `cli-go/VERSION` in a pull request. Merging to protected `main` publishes the version automatically. Never push release tags manually.

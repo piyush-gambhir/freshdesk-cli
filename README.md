@@ -8,6 +8,8 @@ Named commands cover **266 documented API operation variants**, including ticket
 [![Release](https://img.shields.io/github/v/release/piyush-gambhir/freshdesk-cli)](https://github.com/piyush-gambhir/freshdesk-cli/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+[Public documentation](https://projects.piyushgambhir.com/freshdesk-cli/docs) · [Releases](https://github.com/piyush-gambhir/freshdesk-cli/releases)
+
 ## Install
 
 ```sh

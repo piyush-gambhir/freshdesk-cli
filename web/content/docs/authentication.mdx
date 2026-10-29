@@ -1,0 +1,42 @@
+---
+title: Authentication
+description: Use an API key through the OS keychain, a named profile, or environment variables.
+---
+
+Find your key in Freshdesk under your profile picture, then **Profile settings**. API requests run as the agent who owns that key. Replies, notes, and audit entries use that agent's identity and permissions.
+
+## Save a profile
+
+```bash
+freshdesk auth login --domain your-team --profile support
+freshdesk auth status -o json
+freshdesk --read-only agents me -o json
+```
+
+The login prompt hides the key. Login verifies it using `GET /api/v2/agents/me` before saving it in the OS keychain. You can pass a Freshdesk slug such as `your-team` or an HTTPS helpdesk hostname.
+
+```bash
+freshdesk auth list -o json
+freshdesk auth use support
+freshdesk --profile support --read-only tickets list -o json
+```
+
+`auth status` describes the selected domain, profile, and credential source without loading the key. Add `--verify` to make one API request and return the agent record.
+
+## Environment-based authentication
+
+Set `FRESHDESK_DOMAIN` and inject `FRESHDESK_API_KEY` through your secret manager or CI environment. No saved profile is required. Credential precedence is `--api-key`, then `FRESHDESK_API_KEY`, then the selected profile. Avoid putting keys directly in command arguments or shell history.
+
+For piped login, `auth login --key-stdin` reads the key from standard input. Do not log the input.
+
+## Storage and restrictions
+
+Profile metadata lives in `~/.config/freshdesk-cli/config.yaml`. `XDG_CONFIG_HOME` changes the base directory; `FRESHDESK_CONFIG` overrides the complete config path. API keys are stored separately in the OS keychain.
+
+If a keychain is unavailable, prefer environment authentication. `--insecure-storage` explicitly chooses a plaintext `secrets.yaml` file instead, with mode `0600` on Unix. Windows relies on the user's filesystem ACLs.
+
+`auth login --save-read-only` saves a profile restriction. `FRESHDESK_READ_ONLY=1` also makes read-only mode sticky. Read-only mode blocks subsequent local credential changes as well as remote writes.
+
+## Remove a profile
+
+`freshdesk auth logout` removes the selected local profile and saved credential. It does not revoke the API key remotely. Regenerate the key in Freshdesk to revoke it.

@@ -1,0 +1,25 @@
+---
+title: Introduction
+description: An independent, unofficial Freshdesk CLI for tickets, customer records, knowledge bases, and account administration.
+---
+
+`freshdesk` is a Go command-line tool for the Freshdesk REST API. It provides named commands for 266 documented API operation variants and runs on macOS, Linux, and Windows.
+
+Start with [installation](/docs/installation), save a key using [authentication](/docs/authentication), then follow the [quick start](/docs/quickstart). Coding agents can use the [offline command catalog](/docs/agents) without loading credentials or making requests.
+
+## Capabilities
+
+- [Tickets and conversations](/docs/commands/tickets): listing, search, updates, notes, replies, and attachments.
+- [Contacts and companies](/docs/commands/customers): customer records, fields, and native JSON payloads.
+- [Knowledge base](/docs/commands/knowledge-base): categories, folders, articles, translations, and forums.
+- [Administration](/docs/commands/administration): agents, groups, fields, automations, SLAs, and other documented APIs.
+
+The [generated command reference](/docs/reference/commands) lists every command and flag. The [coverage report](/docs/reference/api-coverage) records the upstream inventory and reference discrepancies.
+
+## Writes and verification
+
+API writes require confirmation. [Read-only mode, dry runs, and plan hashes](/docs/safety) let you inspect a request before approving it. Your API key retains the permissions of its Freshdesk agent.
+
+The approved live test covered one marked ticket's creation, priority changes, private notes, attachments, and soft-deletion. Other writes remain fixture-tested. Read the [verification record](/docs/reference/live-verification) before assuming a feature has been exercised on a live account.
+
+Freshdesk CLI is independent and unofficial. It is not affiliated with, endorsed by, or sponsored by Freshworks.

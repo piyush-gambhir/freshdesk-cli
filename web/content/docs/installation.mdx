@@ -1,0 +1,58 @@
+---
+title: Installation
+description: Install a checksum-verified Freshdesk binary, build from source, and update an existing installation.
+---
+
+## macOS and Linux
+
+The installer selects your OS and architecture, verifies the archive against `checksums.txt`, and installs to `~/.local/bin`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/piyush-gambhir/freshdesk-cli/main/install.sh | sh
+```
+
+Pin a version or choose a directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/piyush-gambhir/freshdesk-cli/main/install.sh | VERSION=v0.1.2 sh
+curl -fsSL https://raw.githubusercontent.com/piyush-gambhir/freshdesk-cli/main/install.sh | INSTALL_DIR=/usr/local/bin sh
+```
+
+Make sure the selected directory is on your `PATH`.
+
+## Windows and manual downloads
+
+[GitHub Releases](https://github.com/piyush-gambhir/freshdesk-cli/releases) provides macOS, Linux, and Windows archives for amd64 and arm64. Extract `freshdesk` or `freshdesk.exe` into a directory on your `PATH` and check the archive's SHA-256 against `checksums.txt`.
+
+## Verify provenance
+
+Version 0.1.2 and later releases are immutable and include an SBOM for each archive. Verify the workflow's signed build provenance with GitHub CLI:
+
+```bash
+gh attestation verify freshdesk-cli_darwin_arm64.tar.gz --repo piyush-gambhir/freshdesk-cli
+```
+
+Checksums detect mismatches; provenance identifies the workflow that built the archive.
+
+## Build from source
+
+Requires Go 1.27.3 or later:
+
+```bash
+git clone https://github.com/piyush-gambhir/freshdesk-cli.git
+cd freshdesk-cli/cli-go
+make install
+```
+
+`make install` uses `$(go env GOPATH)/bin` by default. Override it with `INSTALL_DIR`.
+
+## Version and updates
+
+```bash
+freshdesk version -o json
+freshdesk doctor -o json
+freshdesk update --check -o json
+freshdesk update --yes
+```
+
+The updater verifies checksums before replacing the binary. Source installations in Go bin directories receive a source update command instead. There are no background update checks. Read-only mode blocks updating the binary, but permits `update --check`.

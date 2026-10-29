@@ -1,0 +1,27 @@
+---
+title: Pagination
+description: Understand page limits, cursor traversal, and what a complete result means.
+---
+
+## Page-based lists
+
+```bash
+freshdesk --read-only tickets list --updated-since 2026-01-01 --per-page 100 --all --max-pages 10 -o json
+freshdesk --read-only contacts list --page 2 --per-page 50 -o json
+```
+
+Standard paginated lists support `--page`, `--per-page` from 1 to 100, and bounded `--all`. `--max-pages` limits a traversal. Inspect `meta.complete` and `meta.next_page_url` to determine whether more results remain.
+
+Completeness is measured from your selected start page, not from the beginning of the account's history. Filters and Freshdesk's own limits still apply.
+
+## Ticket limits
+
+Ticket lists have a 300-page ceiling and default to tickets created in the last 30 days unless `--updated-since` is supplied. Ticket search uses 30 results per page and at most 10 pages. A successful capped search does not prove there are no other matching tickets.
+
+## Cursors and exceptions
+
+New CSAT APIs accept `--next-token` and `--prev-token`; supported commands can collect pages with `--all`. The CLI validates cursor locations and rebuilds requests on the configured HTTPS origin.
+
+Custom-object record pagination uses a different protocol. Supply native parameters with `--param` and inspect the response metadata manually. Raw API calls also require manual pagination.
+
+The admin `ticket-fields list` endpoint is not paginated and must not receive `page` or `per_page`. Use the [command reference](/docs/reference/commands) to check each operation's supported flags.

@@ -1,0 +1,38 @@
+---
+title: Coding agents
+description: Discover commands offline and run structured, non-interactive reads or reviewed writes.
+---
+
+Any agent or harness that can execute shell commands can use `freshdesk`. Start with the offline catalog:
+
+```bash
+freshdesk commands -o json
+freshdesk commands describe freshdesk.tickets.list -o json
+freshdesk commands resolve -- tickets get 123 --read-only -o json
+freshdesk api methods -o json
+```
+
+Discovery and resolution do not load configuration, access the keychain, make network requests, or write files. The catalog includes stable IDs, effects, flags, authentication metadata, and a registry hash. Resolution uses the real command parser and redacts credential flags.
+
+## Reading session
+
+```bash
+freshdesk --read-only --no-input agents me -o json
+freshdesk --read-only --no-input tickets list --per-page 10 -o json
+```
+
+`auth status -o json` inspects configuration without loading the key. `auth status --verify -o json` makes one API request. Never copy a key, customer record, or signed attachment URL into a report.
+
+## Reviewed writes
+
+Run a dry run, show the user the concrete request, and execute the same arguments only after authorization, with `--expect-plan HASH --yes --no-input`. [Write controls](/docs/safety) explain the boundaries. Do not use `--yes` as a substitute for authorization.
+
+Inspect `meta.complete` before reporting a list as complete. Read a resource back after an uncertain mutation outcome instead of retrying automatically. A queued import or export is not a completed job.
+
+## Agent resources
+
+- [Freshdesk agent skill](https://github.com/piyush-gambhir/freshdesk-cli/blob/main/freshdesk/SKILL.md).
+- [Documentation index](https://projects.piyushgambhir.com/freshdesk-cli/llms.txt).
+- [Full documentation as text](https://projects.piyushgambhir.com/freshdesk-cli/llms-full.txt).
+
+There are no background update requests. Run `freshdesk update --check -o json` when you explicitly want version information.

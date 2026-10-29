@@ -36,6 +36,12 @@ JSON input stays open to native and account-specific fields. Do not advertise of
 
 ## Releases
 
-Update `cli-go/VERSION`, run checks, and push a version tag matching that file, such as `v0.1.0`. The Release workflow tests the tagged source and publishes six platform archives, checksums, and build provenance. A source checkout can use `make install`; end users can use the checksummed installer or `freshdesk update`.
+Bump `cli-go/VERSION` in a pull request. Required CI and CodeQL checks must pass before merging to `main`. The Release workflow tags that commit, tests it, creates six platform archives and SBOMs, attests their checksums, and then publishes an immutable release. Do not push release tags by hand. Recover a failed release by rerunning its original workflow run; a published version is skipped. See [Maintaining the repository](docs/maintaining.md) for the repository safeguards and website deployment.
+
+A source checkout can use `make install`; end users can use the checksummed installer or `freshdesk update`.
 
 Keep tests focused on behavior, request construction, and safety boundaries. Document user-visible flag or behavior changes and regenerate `docs/` in the same change.
+
+## Website
+
+The public documentation site is in `web/`. Run `pnpm install --frozen-lockfile`, `pnpm types:check`, `pnpm build:cloudflare`, and `pnpm test:search` there. Generated reference pages come from `docs/`; update their source rather than the generated MDX.

@@ -1,0 +1,7 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "index", "installation", "authentication", "quickstart", "safety", "output-formats", "pagination", "agents", "compatibility",
+    "---Commands---", "...commands", "---Reference---", "...reference"
+  ]
+}
