@@ -1,0 +1,17 @@
+---
+title: Knowledge base and forums
+description: Navigate categories, folders, and articles using their documented positional IDs.
+---
+
+```bash
+freshdesk --read-only solutions categories list -o json
+freshdesk --read-only solutions folders list 123 -o json
+freshdesk --read-only solutions articles list 456 -o json
+freshdesk --read-only solutions articles get 789 -o json
+```
+
+The folder list takes a category ID. The article list takes a folder ID. Use IDs returned by earlier commands and inspect the active profile before reading or changing content.
+
+Translations, hierarchy operations, and community forums have named commands in the [generated reference](/docs/reference/commands). Their availability depends on account permissions and enabled features.
+
+Publishing an article or changing public forum content can affect customers. Preview the exact request and approve its visibility and destination before executing it. These writes remain fixture-tested unless recorded otherwise in [live verification](/docs/reference/live-verification).

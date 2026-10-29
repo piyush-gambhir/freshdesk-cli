@@ -1,0 +1,24 @@
+---
+title: Contacts and companies
+description: Read customer records and preview native JSON changes.
+---
+
+```bash
+freshdesk --read-only contacts list --per-page 20 -o json
+freshdesk --read-only contacts get 123 -o json
+freshdesk --read-only companies list --per-page 20 -o json
+freshdesk --read-only companies get 456 -o json
+```
+
+Replace IDs with your own account's records. Standard list commands support bounded `--all`; inspect pagination metadata.
+
+## Native fields
+
+```bash
+freshdesk contacts update 123 --input-json @contact.json --dry-run -o json
+freshdesk companies update 456 --input-json @company.json --dry-run -o json
+```
+
+Payloads retain native and custom fields. Freshdesk validates account-specific requirements when a request is actually sent. A successful preview does not establish that a merge, deletion, or bulk operation is safe to run.
+
+Customer records can contain personal data. Keep output and fixtures out of public issues, commits, and screenshots. The [reference](/docs/reference/commands) includes the remaining contact and company operations.

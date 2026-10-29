@@ -1,0 +1,27 @@
+---
+title: Tickets and conversations
+description: List and search tickets, inspect conversations, and preview notes or ticket changes.
+---
+
+## Read tickets
+
+```bash
+freshdesk --read-only tickets list --per-page 10 -o json
+freshdesk --read-only tickets get 123 -o json
+freshdesk --read-only tickets search --query '"status:2"' -o json
+```
+
+Ticket lists and search have different [pagination limits](/docs/pagination). Replace sample IDs with resources from your account.
+
+## Preview a ticket change or private note
+
+```bash
+freshdesk tickets update 123 --priority low --dry-run -o json
+freshdesk tickets note 123 --body 'Investigation note' --set private=true --dry-run -o json
+```
+
+Native JSON is available through `--input-json @payload.json` or repeatable `--set KEY=VALUE`. Upload supported attachments with `--attach PATH`; the plan hash includes the file's contents. Read the [generated reference](/docs/reference/commands) for each operation's flags.
+
+Notes and replies run as the API key owner. A private note may still activate account automations. Inspect notification recipients and automation rules before approving a write. Public replies and outbound emails should be tested only with explicit approval and controlled recipients.
+
+Ticket deletion is soft-deletion. A successful delete does not mean the record was permanently purged.

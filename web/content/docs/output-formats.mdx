@@ -1,0 +1,27 @@
+---
+title: Output formats
+description: Use native JSON fields, pagination metadata, YAML, CSV, or readable tables.
+---
+
+```bash
+freshdesk --read-only tickets list -o json
+freshdesk --read-only tickets list -o yaml
+freshdesk --read-only tickets list -o csv
+freshdesk --read-only tickets list -o table
+```
+
+## JSON and YAML
+
+API results use an envelope containing `contract_version`, `command_id`, `data`, and `meta`. A single page preserves the native response in `data`. With `--all`, `data` is the combined result array. Integer precision and native field names are preserved.
+
+`meta.complete`, `meta.next_page_url`, and `meta.requests` describe the requested traversal. Non-paginated endpoints use `complete: null`. Do not treat that value as proof of exhaustive coverage.
+
+## Tables and CSV
+
+Tables and CSV render result rows. Use JSON when you need native nested values, metadata, or complete error context. The default format is a table.
+
+## Streams and errors
+
+Command data goes to stdout. Diagnostics and errors go to stderr. Exit code `0` means success; `1` means failure. Multi-page failures return no partial success output.
+
+For automation, use `--no-input -o json`. API errors retain useful vendor fields while redacting credentials. Rate limiting reports `retry_after`; mutation failures can report an uncertain outcome. The CLI does not retry requests automatically.

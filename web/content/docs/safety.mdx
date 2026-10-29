@@ -1,0 +1,33 @@
+---
+title: Write controls
+description: Inspect requests, bind execution to a reviewed plan, and keep reads restricted.
+---
+
+## Read-only mode
+
+Use `--read-only` or `FRESHDESK_READ_ONLY=1` for reading sessions. It blocks remote writes, local profile changes, and self-update. A saved read-only profile adds the same restriction. Environment restrictions cannot be removed by passing `--read-only=false`.
+
+Effects come from the reviewed operation registry. Ticket-form cloning is a write even though Freshdesk exposes it through GET. Unknown raw routes count as writes, including unknown GET routes.
+
+## Preview and approve the exact request
+
+```bash
+freshdesk --domain your-team tickets update 123 --status pending --dry-run -o json
+freshdesk --domain your-team tickets update 123 --status pending --expect-plan HASH --yes --no-input -o json
+```
+
+Replace `HASH` with the reviewed preview's hash. The hash binds the target, operation, CLI version, payload, and attachment contents. Changing any of those requires reviewing a new plan. Preview and execution use the same request builder.
+
+A dry run does not contact Freshdesk. It validates request construction, not server permissions, custom field requirements, automations, or Freshdesk business rules.
+
+## Confirmation and identity
+
+Every API write requires confirmation. Non-interactive execution requires `--yes`; `--no-input` never silently approves an action. A hash check verifies the request is unchanged and does not replace the operator's authorization.
+
+Writes use the API key owner's Freshdesk identity. A private note, public reply, or ticket change may activate tenant automations. A private note does not disable those automations. Review notification fields, recipients, and your account's rules before approving a write.
+
+## Handle uncertain outcomes
+
+Requests are never retried automatically. A network error, invalid success response, or server error after a mutation may report `outcome: unknown`. Read the resource back before deciding whether to retry.
+
+Bulk operations, imports, and exports can return a queued job ID. Inspect the corresponding job instead of assuming completion. Keep tests scoped to marked records you are authorized to create and remove.

@@ -10,7 +10,7 @@ Read-only controls cover remote writes, local profile changes, and self-update. 
 
 Writes are never retried automatically. Network failures, invalid success responses, and server errors can leave a mutation's outcome unknown. Inspect server state before deciding whether to repeat it.
 
-Release archives include SHA-256 checksums and GitHub build provenance. Checksums detect a mismatch against a release's checksum file; they do not independently establish who built that release. Verify provenance with:
+Release archives include SHA-256 checksums and GitHub build provenance. Version 0.1.2 and later also include an SBOM for each archive and are immutable after publication. Checksums detect a mismatch against a release's checksum file; they do not independently establish who built that release. Verify provenance with:
 
 ```sh
 gh attestation verify freshdesk-cli_darwin_arm64.tar.gz --repo piyush-gambhir/freshdesk-cli
