@@ -16,7 +16,7 @@ Named commands cover **266 documented API operation variants**, including ticket
 curl -fsSL https://raw.githubusercontent.com/piyush-gambhir/freshdesk-cli/main/install.sh | sh
 ```
 
-Installs `freshdesk` to `~/.local/bin`, verifying SHA-256 checksums first. Override with `INSTALL_DIR`, or pin a version with `VERSION=v0.1.0`. Prebuilt archives support macOS, Linux, and Windows on amd64 and arm64. Download Windows ZIPs from [Releases](https://github.com/piyush-gambhir/freshdesk-cli/releases).
+Installs `freshdesk` to `~/.local/bin`, verifying SHA-256 checksums first. Override with `INSTALL_DIR`, or pin a version with `VERSION=v0.1.3`. Prebuilt archives support macOS, Linux, and Windows on amd64 and arm64. Download Windows ZIPs from [Releases](https://github.com/piyush-gambhir/freshdesk-cli/releases).
 
 From source, with Go 1.27.3 or later:
 
@@ -151,6 +151,8 @@ freshdesk api methods -o json
 ```
 
 Discovery and resolution work offline, without loading configuration or touching the keychain. The resolver uses the real command parser. Unknown raw routes are classified as writes, including GET. Credentials are redacted from resolved flags. Request previews and plan hashes support review before execution; authorization remains the caller's responsibility.
+
+Resolver classifications include explicit `secret_output` and `interactive` booleans for harnesses such as Reckon. `secret_output` is false; `auth login` is marked interactive unless `--key-stdin` is selected.
 
 ## Coverage and verification limits
 

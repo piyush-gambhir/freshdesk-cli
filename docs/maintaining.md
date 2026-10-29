@@ -18,6 +18,8 @@ The ruleset blocks branch deletion and force pushes. Repository administrators r
 
 GitHub Actions defaults to read permissions and cannot approve pull requests. All actions must be pinned to full commit SHAs. Secret scanning, push protection, Dependabot alerts/security updates, and private vulnerability reporting are enabled. Dependabot schedules Go and Actions updates daily and website dependency updates weekly. The auto-merge workflow only enables merging minor and patch dependency updates; all required checks still apply. CodeQL scans Go, JavaScript/TypeScript, Python, and Actions. Scorecard runs on main and weekly.
 
+Scorecard remains advisory. Repository age and historical review coverage take time to establish. This personal repository matches the suite's solo-maintainer policy: administrator bypass is retained, and external, code-owner, and last-push approvals are not required. Those choices lower the branch-protection rating. The optional OpenSSF best-practices badge is not registered. Keep these advisories visible rather than treating a successful scan as a perfect score or dismissing them as vulnerabilities in the CLI.
+
 ## Releases
 
 Change `cli-go/VERSION` in a pull request. After merge, the Release workflow validates the version, tests the source, creates the tag at that commit, generates six platform archives and their SBOMs, uploads a draft release, attests the checksum subjects, and publishes it. Version 0.1.2 and later releases are immutable. Earlier releases are not retroactively locked.

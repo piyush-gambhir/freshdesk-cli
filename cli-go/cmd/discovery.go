@@ -154,7 +154,10 @@ func (a *app) commandsCmd() *cobra.Command {
 			}
 			flags[f.Name] = v
 		})
-		return a.print(map[string]any{"contract_version": "agent-cli/v1", "catalog_hash": registry.Hash(), "command_id": info.ID, "command": target.CommandPath(), "canonical_path": info.Path, "effect": resolved, "effects": []string{resolved}, "conditional": info.Conditional, "flags": flags, "args": positionals, "dry_run_supported": info.Operation != nil || target.CommandPath() == "freshdesk api request"})
+		// No command prints the API key; auth login prompts for it unless --key-stdin is set.
+		keyStdin, _ := target.Flags().GetBool("key-stdin")
+		interactive := target.CommandPath() == "freshdesk auth login" && !keyStdin
+		return a.print(map[string]any{"contract_version": "agent-cli/v1", "catalog_hash": registry.Hash(), "command_id": info.ID, "command": target.CommandPath(), "canonical_path": info.Path, "effect": resolved, "effects": []string{resolved}, "conditional": info.Conditional, "interactive": interactive, "secret_output": false, "flags": flags, "args": positionals, "dry_run_supported": info.Operation != nil || target.CommandPath() == "freshdesk api request"})
 	}})
 	return c
 }
