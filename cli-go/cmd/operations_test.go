@@ -43,6 +43,42 @@ func response(status int, body string, headers http.Header) *http.Response {
 	return &http.Response{StatusCode: status, Header: headers, Body: io.NopCloser(strings.NewReader(body))}
 }
 
+func TestResolveHarnessContract(t *testing.T) {
+	isolate(t)
+	for _, test := range []struct {
+		name        string
+		args        []string
+		interactive bool
+	}{
+		{"read", []string{"tickets", "get", "123"}, false},
+		{"write", []string{"tickets", "update", "123", "--status", "pending"}, false},
+		{"login prompt", []string{"auth", "login"}, true},
+		{"piped login", []string{"auth", "login", "--key-stdin"}, false},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			tr := transportFunc(func(*http.Request) (*http.Response, error) {
+				t.Fatal("offline resolver used the network")
+				return nil, nil
+			})
+			args := append([]string{"commands", "resolve", "--"}, test.args...)
+			code, out, stderr := call(t, tr, "", args...)
+			if code != 0 {
+				t.Fatalf("resolve: %s", stderr)
+			}
+			var result map[string]any
+			if err := json.Unmarshal([]byte(out), &result); err != nil {
+				t.Fatal(err)
+			}
+			if secret, ok := result["secret_output"].(bool); !ok || secret {
+				t.Fatal("harness requires an explicit false secret_output classification")
+			}
+			if interactive, ok := result["interactive"].(bool); !ok || interactive != test.interactive {
+				t.Fatalf("interactive = %v, want %v", result["interactive"], test.interactive)
+			}
+		})
+	}
+}
+
 func TestEveryOperationRoutesThroughTheClient(t *testing.T) {
 	isolate(t)
 	t.Setenv("FRESHDESK_API_KEY", "test-api-key")

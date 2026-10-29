@@ -14,6 +14,8 @@ freshdesk api methods -o json
 
 Discovery and resolution do not load configuration, access the keychain, make network requests, or write files. The catalog includes stable IDs, effects, flags, authentication metadata, and a registry hash. Resolution uses the real command parser and redacts credential flags.
 
+Version 0.1.3 and later resolver classifications include explicit `secret_output` and `interactive` booleans for harnesses such as Reckon. `secret_output` is false. `auth login` is marked interactive unless `--key-stdin` is selected.
+
 ## Reading session
 
 ```bash
