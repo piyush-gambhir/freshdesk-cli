@@ -7,3 +7,6 @@ dist/
 *.test
 coverage.out
 .DS_Store
+
+# Local bundle graph exports
+/.bundle-analysis/
