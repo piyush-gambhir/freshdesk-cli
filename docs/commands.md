@@ -6,18 +6,18 @@ Use `freshdesk COMMAND --help` for individual flags.
 ## Global flags
 
 ```text
-      --api-key string       API key override (prefer FRESHDESK_API_KEY or auth login)
-      --domain string        Account slug or HTTPS hostname (or FRESHDESK_DOMAIN)
-      --dry-run              Validate and print an API request plan without credentials or network
-      --expect-plan string   Execute only if the rebuilt request has this SHA-256 plan hash
-      --no-input             Never prompt; writes require --yes
-  -o, --output string        Output format: table, json, yaml, csv (default "table")
-      --profile string       Named profile (or FRESHDESK_PROFILE)
-  -q, --quiet                Suppress informational stderr output
-      --read-only            Block API writes, profile changes, and self-update
-      --timeout duration     HTTP request timeout (default 30s)
-  -v, --verbose              Log HTTP methods, paths, and status to stderr
-  -y, --yes                  Confirm API writes and self-update without prompting
+      --api-key string           API key override (prefer FRESHDESK_API_KEY or auth login)
+      --domain string            Account slug or HTTPS hostname (or FRESHDESK_DOMAIN)
+      --dry-run[=true|false]     Validate and print an API request plan without credentials or network
+      --expect-plan string       Execute only if the rebuilt request has this SHA-256 plan hash
+      --no-input[=true|false]    Never prompt; writes require --yes
+  -o, --output string            Output format: table, json, yaml, csv (default "table")
+      --profile string           Named profile (or FRESHDESK_PROFILE)
+  -q, --quiet[=true|false]       Suppress informational stderr output
+      --read-only[=true|false]   Block API writes, profile changes, and self-update
+      --timeout duration         HTTP request timeout (default 30s)
+  -v, --verbose[=true|false]     Log HTTP methods, paths, and status to stderr
+  -y, --yes[=true|false]         Confirm API writes and self-update without prompting
 ```
 
 ## Shared flags: tickets list
@@ -25,7 +25,7 @@ Use `freshdesk COMMAND --help` for individual flags.
 All corresponding API commands accept these flags. Fields that are not relevant to an endpoint should be supplied only when its reference documents them.
 
 ```text
-      --all                    Collect pages, stopping at --max-pages or the API limit
+      --all[=true|false]       Collect pages, stopping at --max-pages or the API limit
       --company-id string      Query parameter company_id
       --email string           Query parameter email
       --filter string          Query parameter filter
@@ -51,47 +51,47 @@ All corresponding API commands accept these flags. Fields that are not relevant 
 All corresponding API commands accept these flags. Fields that are not relevant to an endpoint should be supplied only when its reference documents them.
 
 ```text
-      --attach stringArray     Attach a local file as attachments[]; repeat for more files
-      --billable string        Body field billable
-      --body string            Body field body
-      --body-file string       Read the body field as UTF-8 text or HTML from FILE (or -)
-      --company-id string      Body field company_id
-      --content-html string    Body field content_html
-      --description string     Body field description
-      --email string           Body field email
-      --filter string          Query parameter filter
-      --group-id string        Body field group_id
-      --if-match string        Send an If-Match precondition (when supported by the endpoint)
-      --include string         Query parameter include
-      --input-json string      JSON object, @FILE, or - for stdin
-      --mobile string          Body field mobile
-      --multipart              Send multipart form data, even without attachments
-      --name string            Body field name
-      --next-token string      Query parameter next_token
-      --note string            Body field note
-      --order-by string        Query parameter order_by
-      --order-type string      Query parameter order_type
-      --param stringArray      Query parameter KEY=VALUE; repeat for multiple values
-      --phone string           Body field phone
-      --prev-token string      Query parameter prev_token
-      --priority string        Body field priority
-      --private string         Body field private
-      --query string           Query parameter query
-      --requester-id string    Body field requester_id
-      --responder-id string    Body field responder_id
-      --set stringArray        Body FIELD=VALUE (JSON value or text); dotted fields build nested objects
-      --since string           Query parameter since
-      --source string          Body field source
-      --status string          Body field status
-      --subject string         Body field subject
-      --term string            Query parameter term
-      --time-spent string      Body field time_spent
-      --title string           Body field title
-      --type string            Body field type
-      --until string           Query parameter until
-      --updated-since string   Query parameter updated_since
-      --upload stringArray     Upload FIELD=FILE for import CSVs, avatars, or other named file fields
-      --user-id string         Body field user_id
+      --attach stringArray       Attach a local file as attachments[]; repeat for more files
+      --billable string          Body field billable
+      --body string              Body field body
+      --body-file string         Read the body field as UTF-8 text or HTML from FILE (or -)
+      --company-id string        Body field company_id
+      --content-html string      Body field content_html
+      --description string       Body field description
+      --email string             Body field email
+      --filter string            Query parameter filter
+      --group-id string          Body field group_id
+      --if-match string          Send an If-Match precondition (when supported by the endpoint)
+      --include string           Query parameter include
+      --input-json string        JSON object, @FILE, or - for stdin
+      --mobile string            Body field mobile
+      --multipart[=true|false]   Send multipart form data, even without attachments
+      --name string              Body field name
+      --next-token string        Query parameter next_token
+      --note string              Body field note
+      --order-by string          Query parameter order_by
+      --order-type string        Query parameter order_type
+      --param stringArray        Query parameter KEY=VALUE; repeat for multiple values
+      --phone string             Body field phone
+      --prev-token string        Query parameter prev_token
+      --priority string          Body field priority
+      --private string           Body field private
+      --query string             Query parameter query
+      --requester-id string      Body field requester_id
+      --responder-id string      Body field responder_id
+      --set stringArray          Body FIELD=VALUE (JSON value or text); dotted fields build nested objects
+      --since string             Query parameter since
+      --source string            Body field source
+      --status string            Body field status
+      --subject string           Body field subject
+      --term string              Query parameter term
+      --time-spent string        Body field time_spent
+      --title string             Body field title
+      --type string              Body field type
+      --until string             Query parameter until
+      --updated-since string     Query parameter updated_since
+      --upload stringArray       Upload FIELD=FILE for import CSVs, avatars, or other named file fields
+      --user-id string           Body field user_id
 ```
 
 ## API commands
@@ -392,47 +392,47 @@ Unknown routes are treated as writes, including GET. Paths stay on the configure
 Pagination is manual for raw calls; use --param page=N. Named commands support --all where documented.
 
 ```text
-      --attach stringArray     Attach a local file as attachments[]; repeat for more files
-      --billable string        Body field billable
-      --body string            Body field body
-      --body-file string       Read the body field as UTF-8 text or HTML from FILE (or -)
-      --company-id string      Body field company_id
-      --content-html string    Body field content_html
-      --description string     Body field description
-      --email string           Body field email
-      --filter string          Query parameter filter
-      --group-id string        Body field group_id
-      --if-match string        Send an If-Match precondition (when supported by the endpoint)
-      --include string         Query parameter include
-      --input-json string      JSON object, @FILE, or - for stdin
-      --mobile string          Body field mobile
-      --multipart              Send multipart form data, even without attachments
-      --name string            Body field name
-      --next-token string      Query parameter next_token
-      --note string            Body field note
-      --order-by string        Query parameter order_by
-      --order-type string      Query parameter order_type
-      --param stringArray      Query parameter KEY=VALUE; repeat for multiple values
-      --phone string           Body field phone
-      --prev-token string      Query parameter prev_token
-      --priority string        Body field priority
-      --private string         Body field private
-      --query string           Query parameter query
-      --requester-id string    Body field requester_id
-      --responder-id string    Body field responder_id
-      --set stringArray        Body FIELD=VALUE (JSON value or text); dotted fields build nested objects
-      --since string           Query parameter since
-      --source string          Body field source
-      --status string          Body field status
-      --subject string         Body field subject
-      --term string            Query parameter term
-      --time-spent string      Body field time_spent
-      --title string           Body field title
-      --type string            Body field type
-      --until string           Query parameter until
-      --updated-since string   Query parameter updated_since
-      --upload stringArray     Upload FIELD=FILE for import CSVs, avatars, or other named file fields
-      --user-id string         Body field user_id
+      --attach stringArray       Attach a local file as attachments[]; repeat for more files
+      --billable string          Body field billable
+      --body string              Body field body
+      --body-file string         Read the body field as UTF-8 text or HTML from FILE (or -)
+      --company-id string        Body field company_id
+      --content-html string      Body field content_html
+      --description string       Body field description
+      --email string             Body field email
+      --filter string            Query parameter filter
+      --group-id string          Body field group_id
+      --if-match string          Send an If-Match precondition (when supported by the endpoint)
+      --include string           Query parameter include
+      --input-json string        JSON object, @FILE, or - for stdin
+      --mobile string            Body field mobile
+      --multipart[=true|false]   Send multipart form data, even without attachments
+      --name string              Body field name
+      --next-token string        Query parameter next_token
+      --note string              Body field note
+      --order-by string          Query parameter order_by
+      --order-type string        Query parameter order_type
+      --param stringArray        Query parameter KEY=VALUE; repeat for multiple values
+      --phone string             Body field phone
+      --prev-token string        Query parameter prev_token
+      --priority string          Body field priority
+      --private string           Body field private
+      --query string             Query parameter query
+      --requester-id string      Body field requester_id
+      --responder-id string      Body field responder_id
+      --set stringArray          Body FIELD=VALUE (JSON value or text); dotted fields build nested objects
+      --since string             Query parameter since
+      --source string            Body field source
+      --status string            Body field status
+      --subject string           Body field subject
+      --term string              Query parameter term
+      --time-spent string        Body field time_spent
+      --title string             Body field title
+      --type string              Body field type
+      --until string             Query parameter until
+      --updated-since string     Query parameter updated_since
+      --upload stringArray       Upload FIELD=FILE for import CSVs, avatars, or other named file fields
+      --user-id string           Body field user_id
 ```
 
 ### freshdesk auth list
@@ -456,10 +456,10 @@ Login checks GET /api/v2/agents/me before saving. Use --no-verify to save withou
 The default store is the OS keychain. --insecure-storage opts into a plaintext 0600 file.
 
 ```text
-      --insecure-storage   Use an owner-only plaintext secrets file instead of the keychain
-      --key-stdin          Read the API key from stdin
-      --no-verify          Save without calling Freshdesk
-      --save-read-only     Save a read-only restriction in this profile
+      --insecure-storage[=true|false]   Use an owner-only plaintext secrets file instead of the keychain
+      --key-stdin[=true|false]          Read the API key from stdin
+      --no-verify[=true|false]          Save without calling Freshdesk
+      --save-read-only[=true|false]     Save a read-only restriction in this profile
 ```
 
 ### freshdesk auth logout
@@ -481,7 +481,7 @@ freshdesk auth status [flags]
 ```
 
 ```text
-      --verify   Verify access with one GET /agents/me request
+      --verify[=true|false]   Verify access with one GET /agents/me request
 ```
 
 ### freshdesk auth use
@@ -541,7 +541,7 @@ freshdesk config show [flags]
 ```
 
 ```text
-      --verify   Verify access with one GET /agents/me request
+      --verify[=true|false]   Verify access with one GET /agents/me request
 ```
 
 ### freshdesk config use-profile
@@ -561,7 +561,7 @@ freshdesk doctor [flags]
 ```
 
 ```text
-      --online   Verify credentials with GET /agents/me
+      --online[=true|false]   Verify credentials with GET /agents/me
 ```
 
 ### freshdesk update
@@ -577,7 +577,7 @@ Source installs in a Go bin directory print the source update command instead.
 There is no background release check. --check never writes a cache or replaces files.
 
 ```text
-      --check   Only check the latest release; no file writes
+      --check[=true|false]   Only check the latest release; no file writes
 ```
 
 ### freshdesk version
