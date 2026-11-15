@@ -23,10 +23,10 @@ import (
 )
 
 const (
-	Repo = "piyush-gambhir/freshdesk-cli"
+	Repo         = "piyush-gambhir/freshdesk-cli"
 	SourceUpdate = "git pull && make install (in your freshdesk-cli checkout)"
-	MethodSelf = "self"
-	MethodGo   = "go"
+	MethodSelf   = "self"
+	MethodGo     = "go"
 
 	LatestTimeout = 15 * time.Second
 
