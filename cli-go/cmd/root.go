@@ -157,9 +157,6 @@ func execute(ctx context.Context, a *app, args []string) int {
 	return 1
 }
 
-// Recover only the requested error format after parsing fails. The probe knows
-// each flag's arity but treats values as strings so a bad --page cannot hide a
-// later -o json. It does not execute a command or read configuration.
 func errorFormat(root *cobra.Command, args []string, fallback string) string {
 	target, rest, err := root.Find(args)
 	if err != nil {

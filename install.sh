@@ -34,7 +34,6 @@ if [ -z "$expected" ] || [ "$expected" != "$actual" ]; then
   echo 'Checksum verification failed.' >&2
   exit 1
 fi
-# Extract only the expected binary, not arbitrary archive paths.
 tar -xzf "$tmp/$asset" -C "$tmp" freshdesk
 if [ ! -f "$tmp/freshdesk" ] || [ -L "$tmp/freshdesk" ]; then
   echo 'Archive does not contain a regular freshdesk binary.' >&2

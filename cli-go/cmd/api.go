@@ -27,7 +27,6 @@ func (a *app) apiCmd() *cobra.Command {
 		if op.Effect == "read" && (f.input != "" || len(f.set) > 0 || len(f.attachments) > 0 || len(f.uploads) > 0 || f.bodyFile != "" || f.multipart) {
 			return fmt.Errorf("read operations do not accept a request body or uploads")
 		}
-		// Raw requests do not acquire named-operation positional/default rules.
 		op.QueryDefaults = nil
 		op.RequiredQuery = nil
 		op.BodyDefaults = nil

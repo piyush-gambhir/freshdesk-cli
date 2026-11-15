@@ -1,5 +1,3 @@
-// Generates the reference pages from the repository's docs/ (written by `make docs`),
-// so the site always matches the CLI. The output is gitignored; builds run this first.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -7,7 +5,6 @@ const root = path.resolve(import.meta.dirname, '..');
 const blob = 'https://github.com/piyush-gambhir/freshdesk-cli/blob/main';
 const outDir = path.join(root, 'content/docs/reference');
 
-// Repository docs that have their own page on this site, with the link text to show.
 const siteLinks = {
   'docs/api-coverage.md': ['/docs/reference/api-coverage', 'API coverage'],
   'docs/commands.md': ['/docs/reference/commands', 'Command reference'],
@@ -22,7 +19,6 @@ const pages = [
   { from: 'docs/maintaining.md', slug: 'maintaining', title: 'Maintaining the repository', description: 'Required checks, repository safeguards, automatic releases, and website deployment.' },
 ];
 
-// Points a relative link at this site's page for that doc, or at the file on GitHub.
 function rewriteLink(text, target, fromFile) {
   if (/^[a-z]+:/i.test(target) || target.startsWith('#') || target.startsWith('/')) return `[${text}](${target})`;
   const [file, hash = ''] = target.split('#');
@@ -33,7 +29,6 @@ function rewriteLink(text, target, fromFile) {
   return `[${text.endsWith('.md') ? page[1] : text}](${page[0]}${anchor})`;
 }
 
-// MDX treats { } and < as syntax in prose; code spans and fences stay literal.
 function escapeProse(text) {
   return text.replace(/[{}<]/g, (c) => (c === '<' ? '&lt;' : `\\${c}`));
 }

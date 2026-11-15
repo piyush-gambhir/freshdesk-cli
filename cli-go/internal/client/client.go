@@ -1,4 +1,3 @@
-// Package client sends bounded, authenticated Freshdesk requests without retries.
 package client
 
 import (
@@ -28,8 +27,6 @@ const MaxAttachments = 20 << 20
 var slug = regexp.MustCompile(`^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$`)
 var hostPattern = regexp.MustCompile(`^[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?$`)
 
-// Domain accepts a Freshdesk account slug or an explicit HTTPS hostname. Paths,
-// credentials, queries, and ports are rejected rather than silently discarded.
 func Domain(value string) (string, error) {
 	value = strings.TrimSpace(value)
 	if slug.MatchString(value) {
@@ -50,7 +47,6 @@ func Domain(value string) (string, error) {
 	return "https://" + strings.ToLower(u.Hostname()), nil
 }
 
-// Path confines raw calls and pagination to helpdesk API routes.
 func Path(value string) (string, error) {
 	if !strings.HasPrefix(value, "/api/v2/") && value != "/scenario_automations.json" {
 		return "", fmt.Errorf("path must start with /api/v2/ (or be /scenario_automations.json)")
@@ -76,8 +72,6 @@ type Attachment struct {
 	Data   []byte `json:"-"`
 }
 
-// ReadAttachment freezes content before preview and execution so the hash binds
-// the bytes sent, rather than an on-disk filename that can change later.
 func ReadAttachment(field, path string) (Attachment, error) {
 	if field == "" || strings.ContainsAny(field, "\r\n\x00") {
 		return Attachment{}, fmt.Errorf("invalid upload field")
@@ -192,7 +186,6 @@ func (c Client) Do(ctx context.Context, p Plan) (*Response, error) {
 	}
 	h := &http.Client{Transport: c.Transport, Timeout: timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}
 	if c.Log != nil {
-		// Query values can contain customer data. Log only the method and path.
 		fmt.Fprintf(c.Log, "%s %s\n", p.Method, c.Scrub(u.EscapedPath()))
 	}
 	res, err := h.Do(req)
@@ -250,7 +243,7 @@ func (c Client) Do(ctx context.Context, p Plan) (*Response, error) {
 			message += "; redirects are not followed, check the Freshdesk account domain"
 		}
 		if err != nil {
-			value = nil // HTML errors can contain credentials and should not reach terminals.
+			value = nil
 		}
 		return nil, &APIError{Kind: kind, Message: message, HTTPStatus: res.StatusCode, Details: value, RetryAfter: res.Header.Get("Retry-After"), Outcome: outcome}
 	}
