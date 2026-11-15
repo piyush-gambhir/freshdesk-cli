@@ -1,4 +1,3 @@
-// Package registry is the reviewed inventory behind commands and API discovery.
 package registry
 
 import (

@@ -377,7 +377,6 @@ func (a *app) prepare(cmd *cobra.Command, op registry.Operation, path string, r 
 }
 
 func bodyValue(key, raw string) any {
-	// Free text must stay text even if it happens to look like JSON or a number.
 	switch key {
 	case "status", "priority", "source", "requester_id", "responder_id", "group_id", "company_id", "user_id", "private", "billable":
 		return value(raw)
@@ -427,9 +426,6 @@ func nextPage(p client.Plan, res *client.Response, op registry.Operation) (strin
 			if paging, ok := m["paging"].(map[string]any); ok {
 				if value, ok := paging["next"].(string); ok && value != "" {
 					next, err := current.Parse(value)
-					// Freshdesk can return an http cursor link for an HTTPS API
-					// response. Extract only its token and rebuild on the original
-					// HTTPS origin; never follow or send credentials to that URL.
 					sameScheme := err == nil && (next.Scheme == current.Scheme || current.Scheme == "https" && next.Scheme == "http")
 					if !sameScheme || next.Host != current.Host || next.Path != current.Path || next.User != nil || next.Fragment != "" {
 						return "", fmt.Errorf("unsafe cursor pagination link from Freshdesk")
@@ -458,7 +454,6 @@ func nextPage(p client.Plan, res *client.Response, op registry.Operation) (strin
 		if err != nil || n != previous+1 {
 			return "", fmt.Errorf("pagination did not advance by one page")
 		}
-		// Reuse the original filters, never API-provided arbitrary query values.
 		q := current.Query()
 		q.Set("page", strconv.Itoa(n))
 		current.RawQuery = q.Encode()

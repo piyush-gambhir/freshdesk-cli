@@ -1,4 +1,3 @@
-// Package config stores profile metadata separately from keychain credentials.
 package config
 
 import (
@@ -62,7 +61,6 @@ func Load(path string) (*Config, error) {
 	return c, nil
 }
 
-// Update serializes profile and credential transactions across processes.
 func Update(ctx context.Context, path string, mutate func(*Config) error) error {
 	if err := os.MkdirAll(filepath.Dir(path), 0700); err != nil {
 		return err

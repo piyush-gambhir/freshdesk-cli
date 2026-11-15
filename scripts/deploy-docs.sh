@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Publish the checked-in docs from an up-to-date main checkout.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

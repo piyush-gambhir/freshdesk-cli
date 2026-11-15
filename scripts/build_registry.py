@@ -8,8 +8,6 @@ from urllib.parse import parse_qsl
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "cli-go/internal/registry"
 
-# One line per reference entry, in reference order. Translation variants and
-# service-management variants deliberately have their own commands.
 COMMANDS = """
 tickets create
 tickets outbound-email
@@ -279,8 +277,6 @@ audit-log exports create
 audit-log exports get
 """.strip().splitlines()
 
-# Corrections are based on the same reference's curl examples. Where those
-# disagree as well, retain the route heading and expose the discrepancy.
 CORRECTIONS = {
     "clone_ticket_form": ("/api/v2/ticket-forms/{id}/clone", "The reference's curl example includes /clone; the heading omits it. GET has a write effect."),
     "delete_contact_field": ("/api/v2/contact_fields/{id}", "The curl example uses plural contact_fields; the heading is singular."),
@@ -290,7 +286,6 @@ CORRECTIONS = {
     "update_canned_response_folder": ("/api/v2/canned_response_folders/{id}", "The curl example uses plural canned_response_folders; the heading is singular."),
     "list_all_scenario_automations": ("/api/v2/scenario_automations", "The heading shows a legacy .json route; the curl example uses /api/v2/scenario_automations."),
 }
-
 
 def main():
     snapshot = json.loads((BASE / "testdata/freshdesk-api.json").read_text())
@@ -323,11 +318,8 @@ def main():
         effect = "write" if source["method"] != "GET" or command == "ticket-forms clone" else "read"
         action = command.split()[-1]
         paginated = effect == "read" and action in {"list", "conversations", "time-entries", "ratings", "fields", "responses", "associated", "subfolders", "search", "followed", "participated", "filter"}
-        # These APIs have a different cursor/page_size protocol. Raw query
-        # parameters remain available, but --all must not guess that protocol.
         if command.startswith("custom-objects") or "autocomplete" in command or command == "solutions articles search":
             paginated = False
-        # The admin ticket-field endpoint rejects page and per_page.
         if command == "ticket-fields list":
             paginated = False
         body_defaults = {}
@@ -358,7 +350,6 @@ def main():
         registry.append(operation)
     (BASE / "operations.json").write_text(json.dumps(registry, indent=2) + "\n")
     print(f"Wrote {len(registry)} reviewed operations")
-
 
 if __name__ == "__main__":
     main()
