@@ -4,7 +4,7 @@ The reviewed registry covers **266 documented operation variants**, including tr
 
 Source: [Freshdesk API reference](https://developers.freshdesk.com/api/), retrieved 2026-10-29.
 The endpoint-facts snapshot is in `cli-go/internal/registry/testdata/freshdesk-api.json`.
-Registry SHA-256: `b5259dfc533be5397ac3065b305f415f539fa57824de4eacd56ad35c8ee3dd37`.
+Registry SHA-256: `8350e8d247eadf691689ab201ae7612d3079c71fbe064d8971f6c29d44726309`.
 
 All rows have named commands and pass request-routing fixture tests. See [live verification notes](live-verification.md) for read checks and the approved one-ticket lifecycle test. Other writes remain fixture-tested; plan entitlements and agent permissions still apply.
 

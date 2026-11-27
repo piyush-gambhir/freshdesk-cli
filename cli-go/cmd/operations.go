@@ -191,7 +191,7 @@ func value(raw string) any {
 }
 
 func (a *app) prepare(cmd *cobra.Command, op registry.Operation, path string, r *requestFlags) (*client.Plan, error) {
-	if r.input == "-" && r.bodyFile == "-" {
+	if (r.input == "-" || r.input == "@-") && r.bodyFile == "-" {
 		return nil, fmt.Errorf("stdin can supply either --input-json or --body-file, not both")
 	}
 	if _, err := client.Path(path); err != nil {
@@ -564,7 +564,11 @@ func (a *app) send(cmd *cobra.Command, c *client.Client, p client.Plan, op regis
 	}
 	full := map[string]any{"contract_version": "agent-cli/v1", "command_id": op.ID, "data": data, "meta": meta}
 	var tableRows []map[string]any
-	if list, ok := extractRows(data); ok {
+	var single bool
+	if m, ok := data.(map[string]any); ok && !op.Paginated {
+		_, single = m["id"]
+	}
+	if list, ok := extractRows(data); ok && !single {
 		tableRows = make([]map[string]any, 0, len(list))
 		for _, v := range list {
 			if row, ok := v.(map[string]any); ok {

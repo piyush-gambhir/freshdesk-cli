@@ -75,7 +75,7 @@ freshdesk contacts imports create --upload import_file=contacts.csv \
   --input-json @import-options.json --dry-run -o json
 ```
 
-`--input-json` accepts an inline object, `@FILE`, or `-` for stdin. `--set FIELD=VALUE` accepts JSON values or plain text; dotted names build nested objects. Explicit convenience flags override those fields. Standard ticket status and priority names map to Freshdesk's numbers; account-specific statuses can be supplied numerically. `--body-file` sends its text as-is, including HTML; it does not convert Markdown.
+`--input-json` accepts an inline object, `@FILE`, or `-` or `@-` for stdin. `--set FIELD=VALUE` accepts JSON values or plain text; dotted names build nested objects. Explicit convenience flags override those fields. Standard ticket status and priority names map to Freshdesk's numbers; account-specific statuses can be supplied numerically. `--body-file` sends its text as-is, including HTML; it does not convert Markdown.
 
 `--attach FILE` uploads `attachments[]`. `--upload FIELD=FILE` supports named upload fields, such as import CSVs and avatars, using the field name in the endpoint reference. Nested JSON fields are converted to bracketed multipart fields. Uploads are limited to 20 MiB in total. Attachment bytes, filenames, target URL, payload, API registry, CLI version, and optional `--if-match` are bound into the plan hash. `--expect-plan HASH` rejects a different request before sending it. API-specific support for an If-Match precondition is not assumed.
 
