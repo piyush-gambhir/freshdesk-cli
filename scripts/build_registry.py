@@ -337,6 +337,8 @@ def main():
         }
         if paginated:
             operation["pagination"] = "cursor" if command.startswith("csat ") else "page"
+            defaults.pop("page", None)
+            defaults.pop("per_page", None)
         if defaults:
             operation["query_defaults"] = defaults
         if required_query:

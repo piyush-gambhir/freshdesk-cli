@@ -24,8 +24,14 @@ func (a *app) apiCmd() *cobra.Command {
 			return fmt.Errorf("method must be GET, POST, PUT, PATCH, or DELETE")
 		}
 		op := classify(method, args[1])
-		if op.Effect == "read" && (f.input != "" || len(f.set) > 0 || len(f.attachments) > 0 || len(f.uploads) > 0 || f.bodyFile != "" || f.multipart) {
-			return fmt.Errorf("read operations do not accept a request body or uploads")
+		bodyField := false
+		for k := range f.fields {
+			if name, ok := strings.CutPrefix(k, "body:"); ok && cmd.Flags().Changed(strings.ReplaceAll(name, "_", "-")) {
+				bodyField = true
+			}
+		}
+		if op.Effect == "read" && (bodyField || f.input != "" || len(f.set) > 0 || len(f.attachments) > 0 || len(f.uploads) > 0 || f.bodyFile != "" || f.multipart) {
+			return fmt.Errorf("read operations do not accept a request body or uploads; use --param for query parameters")
 		}
 		op.QueryDefaults = nil
 		op.RequiredQuery = nil

@@ -467,3 +467,78 @@ func TestQueuedJobIsAcceptedAndNoContentAcknowledged(t *testing.T) {
 		t.Fatalf("missing mutation acknowledgement: %s %s", out, stderr)
 	}
 }
+
+func TestSingleObjectTableKeepsTheObject(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		return response(200, `{"id":3,"name":"Travel experts","match_type":"all","agents":[{"id":7}]}`, nil), nil
+	})
+	for _, format := range []string{"table", "csv"} {
+		code, out, stderr := call(t, tr, "", "skills", "get", "3", "-o", format)
+		if code != 0 || !strings.Contains(out, "Travel experts") || !strings.Contains(out, "match_type") {
+			t.Fatalf("%s hid the object's fields: %s %s", format, out, stderr)
+		}
+	}
+}
+
+func TestCreateRouteTableKeepsTheObject(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		return response(201, `{"id":3,"name":"Travel experts","match_type":"all","agents":[{"id":7}]}`, nil), nil
+	})
+	for _, format := range []string{"table", "csv"} {
+		code, out, stderr := call(t, tr, "", "skills", "create", "--input-json", `{"name":"Travel experts"}`, "--yes", "-o", format)
+		if code != 0 || !strings.Contains(out, "Travel experts") || !strings.Contains(out, "match_type") {
+			t.Fatalf("%s hid the created object: %s %s", format, out, stderr)
+		}
+	}
+}
+
+func TestListWrapperTableRendersRows(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	t.Setenv("FRESHDESK_API_KEY", "key")
+	tr := transportFunc(func(r *http.Request) (*http.Response, error) {
+		return response(200, `{"total":1,"results":[{"id":1,"subject":"Printer on fire"}]}`, nil), nil
+	})
+	code, out, stderr := call(t, tr, "", "tickets", "search", "--query", "status:2", "-o", "table")
+	if code != 0 || !strings.Contains(out, "Printer on fire") || strings.Contains(out, "total") {
+		t.Fatalf("wrapper not rendered as rows: %s %s", out, stderr)
+	}
+}
+
+func TestRawReadRejectsBodyFieldFlags(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	code, out, stderr := call(t, nil, "", "api", "request", "GET", "/api/v2/tickets", "--email", "a@example.com", "--dry-run", "-o", "json")
+	if code == 0 || !strings.Contains(stderr, "do not accept") {
+		t.Fatalf("GET body field accepted: %s %s", out, stderr)
+	}
+	code, out, stderr = call(t, nil, "", "api", "request", "GET", "/api/v2/tickets", "--param", "per_page=5", "--dry-run", "-o", "json")
+	if code != 0 || !strings.Contains(out, "per_page=5") {
+		t.Fatalf("GET query param rejected: %s %s", out, stderr)
+	}
+}
+
+func TestAgentAvailabilityListAcceptsPageParam(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	code, out, stderr := call(t, nil, "", "agents", "availability", "list", "--param", "page=2", "--dry-run", "-o", "json")
+	var preview struct{ Plan struct{ URL string } }
+	if code != 0 || json.Unmarshal([]byte(out), &preview) != nil || !strings.HasSuffix(preview.Plan.URL, "/api/v2/agents?only=availability&page=2&per_page=30") {
+		t.Fatalf("availability paging: %s %s", out, stderr)
+	}
+}
+
+func TestStdinCannotFeedInputJSONAndBodyFile(t *testing.T) {
+	isolate(t)
+	t.Setenv("FRESHDESK_DOMAIN", "acme")
+	code, out, stderr := call(t, nil, `{"body":"<p>Hi</p>"}`, "tickets", "reply", "1", "--input-json", "@-", "--body-file", "-", "--dry-run", "-o", "json")
+	if code == 0 || !strings.Contains(stderr, "not both") {
+		t.Fatalf("stdin read twice: %s %s", out, stderr)
+	}
+}

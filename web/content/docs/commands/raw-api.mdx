@@ -10,6 +10,6 @@ freshdesk --read-only api request GET /api/v2/tickets --param per_page=10 -o jso
 
 Known routes use the operation registry's semantic effect. Unknown routes are treated as writes, including GET routes. Requests stay on the configured helpdesk origin; absolute URLs and traversal paths are rejected.
 
-Raw calls require manual pagination through `--param` and native response metadata. They do not inherit named-operation query defaults or positional rules. Prefer a named command when one exists.
+Raw calls require manual pagination through `--param` and native response metadata. They do not inherit named-operation query defaults or positional rules. Raw read requests reject request-body flags (`--input-json`, `--set`, `--body-file`, uploads, and body field flags); put query parameters in `--param`. Prefer a named command when one exists.
 
 Raw writes support the same payload, preview, confirmation, and hash controls. A dry run sends no request and does not prove Freshdesk accepts the payload or route.

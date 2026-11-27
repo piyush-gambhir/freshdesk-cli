@@ -1575,8 +1575,6 @@
     "source_path": "/api/v2/agents?page=1&per_page=10&only=availability",
     "pagination": "page",
     "query_defaults": {
-      "page": "1",
-      "per_page": "10",
       "only": "availability"
     }
   },
